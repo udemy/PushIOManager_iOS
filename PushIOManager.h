@@ -39,11 +39,15 @@
 #endif
 
 
-@protocol PushIOManagerDelegate
+@protocol PushIOManagerDelegate <NSObject>
 - (void)registrationSucceeded;
 - (void)registrationFailedWithError:(NSError *)error statusCode:(int)statusCode;
 - (void)availableNotificationTypesSucceeded:(NSArray *)notificationTypes; 
 - (void)availableNotificationTypesFailedWithError:(NSError *)error statusCode:(int)statusCode;
+
+// This is a new and mandatory method for delegates - when triggered PushIO wants you to re-send 
+// all tags this device should be registered for.
+- (void)reRegisterChannels;
 @end
 
 
@@ -70,6 +74,9 @@
 @property (retain, nonatomic) NSString *lastParameters;
 @property (retain, nonatomic) NSString *contentType;
 @property (retain, nonatomic) NSMutableArray *notificationTypesArray;
+
+// A client either needs to check this flag, or implement the reRegisterChannels callback
+@property (nonatomic, readonly) BOOL shouldReRegisterChannels;
 
 // Register with Push IO with Channels (Channels are Strings)
 - (void)registerChannelsWithPushIO:(NSArray *)channels;
