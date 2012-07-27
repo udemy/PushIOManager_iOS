@@ -5,7 +5,20 @@
 //  Copyright (c) 2009-2012 Push IO LLC. All rights reserved.
 //
 
+// This version of the PushIOManager library is 2.0.1
+
 #import <Foundation/Foundation.h>
+
+// IMPORTANT: To use the Push IO service, you are required to have a PushIO API key. You can
+// obtain this by setting up an account and adding an app at https://manage.push.io
+//
+// After you add an app, set up your iOS platform via the "Set Up" section. You will then see a link
+// to download a "pushio_config.json" file, which contains your API Key.  
+//
+// You need to place it inside of a file called "pushio_config.json", which you then
+// place inside your project alongside the AppDelegate (so that it is included in your application bundle).
+
+
 
 @protocol PushIOManagerDelegate <NSObject>
 - (void)readyForRegistration;
@@ -22,12 +35,12 @@ typedef enum  {
 } PushIODebugLevel;
 
 typedef enum  {
-    PUSHIO_ENGAGEMENT_METRIC_LAUNCH = 0,
-    PUSHIO_ENGAGEMENT_METRIC_ACTIVE_SESSION = 1,
+    PUSHIO_ENGAGEMENT_METRIC_LAUNCH = 0,  // Push IO internal use
+    PUSHIO_ENGAGEMENT_METRIC_ACTIVE_SESSION = 1, // Push IO internal use
     PUSHIO_ENGAGEMENT_METRIC_INAPP_PURCHASE = 2,
     PUSHIO_ENGAGEMENT_METRIC_PREMIUM_CONTENT = 3,
     PUSHIO_ENGAGEMENT_METRIC_SOCIAL = 4,
-    PUSHIO_ENGAGEMENT_METRIC_OTHER = 5,
+    PUSHIO_ENGAGEMENT_METRIC_OTHER = 5, // Push IO internal use
 } PushIOEngagementMetrics;
 
 
@@ -46,13 +59,34 @@ typedef enum  {
 @property (nonatomic, strong) NSString *lastSoundFileName;
 @property (nonatomic, strong) NSString *lastBadgeUpdate;
 
-// Every time an engagementID is parsed from a push, we store it until cleared by the app being killed or
-// going into the background.   You can use this either to make use of the enagementID sent in a push, or
-// simply to verify an engagementID was present after parsing the push results.
-- (NSString *)lastEngagementID;
 
 //
-// Registration
+// Setup
+//
+// Methods to be integrated into your app lifecycle to help us configure your app for Push IO
+- (void) didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+- (void) didReceiveRemoteNotification:(NSDictionary *)userInfo;
+- (void) didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
+- (void) didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
+- (void) applicationDidEnterBackground;
+- (void) applicationWillEnterForeground;
+- (void) applicationDidBecomeActive;
+
+//
+//
+// Simple (Broadcast Push) Registration
+//
+// Register a device with Push IO so you can broadcast to a user, without them opting into specific categories.
+- (void) registerWithPushIO;
+
+// Delete a device from Push IO
+- (void) unregisterFromPushIO;
+
+// Tells you if application has successfully registered with PushIO to receive notifications.
+- (BOOL) readyToReceivePushNotifications;
+
+//
+// Targeted (Segmentation/Category Push) Registration 
 //
 // Register a list of categories for this device with Push IO. Categories let you opt your user into specific groups
 // such as "Birdwatchers" or "BroncosFans"
@@ -71,85 +105,40 @@ typedef enum  {
 - (void) unregisterAllCategories;
 
 
-// Register a device with Push IO so you can broadcast to a user, without them opting into specific categories.
-- (void) registerWithPushIO;
-
-// Delete this device from Push IO
-- (void) unregisterFromPushIO;
-
-// Tells you if application has successfully registered with PushIO to receive notifications.
-- (BOOL) readyToReceivePushNotifications;
-
 //
 // Engagement Metric Tracking
 //
-// Call on resume where you have some kind of push dictionary
-- (BOOL) trackEngagementOptions:(NSDictionary *)optionsDict withMetric:(PushIOEngagementMetrics)metric;
-
-// You can call this from anywhere with a simple metric.
+//
+// You can call this from anywhere to track whether your push led to a conversion
 - (void) trackEngagementMetric:(PushIOEngagementMetrics)metric;
 
-// Call this from your AppDelegate applicationDidEnterBackground to ensure proper metric tracking
-- (void) resetLastEngagement;
+// You can call this to track a custom metric, and whether it led to a conversion
+- (void) trackEngagementCustomMetric:(NSString *)customMetric;
 
-// 
-// Helpers
+// You don't need to call this method directly, we use it for you.
+- (BOOL) trackEngagementOptions:(NSDictionary *)optionsDict withMetric:(PushIOEngagementMetrics)metric;
+
 //
-// Methods to help with push token registration.
-// Note you can either simply register for a token and give it to Push IO (using pushTokenFound:)
-// Or use the macro defined at the end of this file to add methods that will handle the callbacks for you.
-- (void) pushTokenFound:(NSData *)token;
-- (void) recordPushTokenError:(NSError *)pushTokenRegisterError;
-
+// Other Helpers
+//
 // Currently in-use Push IO api settings
 - (NSString *) pushIOAPIHost;
 - (NSString *) pushIOAPIKey;
 
-// A unique ID used by Push IO. You can use this for registering testing devices.
+// A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io
 // You can also find this in the NSUserDefaults via the key @"PUSHIO_UUID" once it has been created.  
 // This call will always return a non-null value.
 - (NSString *) pushIOUUID;
 
+//
+// Singleton instance
+//
++ (PushIOManager *) sharedInstance;
 
 // Sets the delegate of the shared instance, shortcut method
 + (void) setDelegate:(id <PushIOManagerDelegate>)delegate;
 
-// 
-// 
-// Singleton instance
-//
-+(PushIOManager *) sharedInstance;
 
 @end
 
 
-// In your app delegate if you simply call:
-//     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge];
-
-// then add the following macro in your application delegate @implmentation block, all of the push 
-// related registration callbacks will be handled for you.
-
-// You still need to implement the methods that handle incoming push requests.
-
-/*
- 
-#define PUSHIO_HANDLE_PUSH_REGISTRATION \
-\
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken\
-{\
-    [[PushIOManager sharedInstance] pushTokenFound:deviceToken];\
-    [[PushIOManager sharedInstance] registerCategories:nil];\
-}\
-\
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error\
-{\
-    [[PushIOManager sharedInstance] recordPushTokenError:error];\
-}\
-
-#define PUSHIO_HANDLE_ENGAGEMENT_METRIC_ACTIVE_SESSION \
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo\
-{\
-    [[PushIOManager sharedInstance] trackEngagementOptions:userInfo withMetric:PUSHIO_ENGAGEMENT_METRIC_ACTIVE_SESSION];\
-}\
-
-*/
