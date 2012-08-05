@@ -59,6 +59,9 @@ typedef enum  {
 @property (nonatomic, strong) NSString *lastSoundFileName;
 @property (nonatomic, strong) NSString *lastBadgeUpdate;
 
+// This gives you the entire push dictionary above the APS level, along with other meta values that may have been sent in the push.
+@property (nonatomic, strong) NSDictionary *lastPushMeta;
+
 
 //
 // Setup
@@ -68,9 +71,6 @@ typedef enum  {
 - (void) didReceiveRemoteNotification:(NSDictionary *)userInfo;
 - (void) didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void) didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
-- (void) applicationDidEnterBackground;
-- (void) applicationWillEnterForeground;
-- (void) applicationDidBecomeActive;
 
 //
 //
@@ -104,6 +104,9 @@ typedef enum  {
 // Unregister all categories for this device from Push IO
 - (void) unregisterAllCategories;
 
+// Returns information on the categories for which this app has requested registration.
+- (BOOL) isRegisteredForCategory:(NSString *)category;
+- (NSArray *) allRegisteredCategories;
 
 //
 // Engagement Metric Tracking
@@ -126,7 +129,6 @@ typedef enum  {
 - (NSString *) pushIOAPIKey;
 
 // A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io
-// You can also find this in the NSUserDefaults via the key @"PUSHIO_UUID" once it has been created.  
 // This call will always return a non-null value.
 - (NSString *) pushIOUUID;
 
