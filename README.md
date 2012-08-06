@@ -5,8 +5,8 @@
 * [Integration Guide](http://docs.push.io/PushIOManager_iOS/)
 
 ## Push IO Resources
-* [Account Sign Up] (https://manage.push.io) 
-* [Documention](http://docs.push.io)   
+* [Sign Up] (https://manage.push.io)  
+* [Documention](http://docs.push.io)  
 * [Support](http://pushio.zendesk.com)  
 * [Billing Questions](mailto:sales@push.io)  
 
