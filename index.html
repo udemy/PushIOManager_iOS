@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Push IO Manager by pushio</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Push IO Manager</h1>
+        <p>iOS Integration Guide</p>
+
+        <p class="view"><a href="https://github.com/pushio/PushIOManager_iOS">View the Project on GitHub <small>pushio/PushIOManager_iOS</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/pushio/PushIOManager_iOS/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/pushio/PushIOManager_iOS/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/pushio/PushIOManager_iOS">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><img src="http://push.io/wp-content/uploads/2012/05/pushio_logo.png" alt="Push IO®"></p>
+
+<p>Copyright © 2009 - 2012 Push IO LLC. All Rights Reserved.<br>
+Push IO® is a registered trademark in the United States. All other trademarks are the property of their respective owners.</p>
+
+<h4>Software License Information</h4>
+
+<p>The use of any and all Push IO software regardless of release state is governed by the terms of a Software License Agreement and Terms of Use that are not included here but required by reference. </p>
+
+<h4>Privacy Information</h4>
+
+<p>The use of Push IO services is subject to various privacy policies and restrictions on the use of end user information. For complete information please refer to your Master Agreement, our website privacy policies, and/or other related documents.</p>
+
+<h4>Billing</h4>
+
+<p>For information on your account and billing, please contact <a href="mailto:sales@push.io">sales@push.io</a></p>
+
+<h4>Contact Info</h4>
+
+<p>Push IO<br>
+1035 Pearl Street, Suite 400<br>
+Boulder, CO 80302 USA<br>
+303-335-0903<br><a href="mailto:support@push.io">support@push.io</a><br><a href="http://www.push.io">www.push.io</a>   </p>
+
+<h2>Preface</h2>
+
+<p>Push IO is a leading provider of real-time push notification alerts and mobile data delivery.This document provides the necessary information to leverage Push IO for your mobile application. This document corresponds to the latest version of PushIOManager for iOS.</p>
+
+<h2>Definitions</h2>
+
+<h4>UUID</h4>
+
+<p>A unique identifier corresponding to a specific device that is used to register with the Push IO service.</p>
+
+<h4>Category</h4>
+
+<p>A category defines a specific content type that your app has which users might  be interested in. For example, if your app is a sports app, a category may be a specific team. </p>
+
+<h4>Audience</h4>
+
+<p>An audience defines a group of users based on one or more categories or platforms. For example, you might make an audience out of all of the users who have registered to a category for a team in the Western Conference who are using your app on iOS.</p>
+
+<h4>Test Device</h4>
+
+<p>A device specially registered with Push IO to help you troubleshoot, test, and preview push notifications. </p>
+
+<h2>App Integration</h2>
+
+<h4>Overview</h4>
+
+<p>Push IO provides a lightweight PushIOManager library for each supported platform. </p>
+
+<p>The library provides simple methods for registering so Push IO can send push notifications to a device via the platform gateway. The library also provides interfaces for segmenting your users into groups called categories. This allows you to send targeted push notifications only to those users who have expressed an interest in <em>bird watching</em>, and then perhaps only users who are interested in <em>robins</em>.</p>
+
+<p>Push IO is the only push notification provider which provides data that allows you to understand how push notification engagement leads your users to high-value actions like in-app purchases, premium content viewing, and more. The PushIOManager library provides a simple mechanism to capture this push conversion information, which is available to you via the <a href="https://manage.push.io">Push IO Manager</a> dashboard.</p>
+
+<h4>Integration Prerequisites</h4>
+
+<p>Before continuing, be sure you have what you need to integrate Push IO into your app.</p>
+
+<ol>
+<li>Sign Up for a Push IO account at <a href="https://manage.push.io">https://manage.push.io</a>
+</li>
+<li>Download our Push IO Mobile Dashboard app to easily send your first push!</li>
+<li>Setup your app and add an iOS platform at <a href="https://manage.push.io">https://manage.push.io</a>
+</li>
+<li>Downloaded PushIOManager for iOS and pushio_config.json from <a href="https://manage.push.io">Set Up &gt; iOS</a>
+</li>
+</ol><p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/platformdetail.png" alt="Platform download"></p>
+
+<p>All set? Now you’re ready to integrate Push IO into your app!</p>
+
+<h2>PushIOManager for iOS</h2>
+
+<p>In order to add the PushIOManager framework to your iOS application, follow these simple steps:</p>
+
+<ul>
+<li>Locate the two files you downloaded from Set Up &gt; [platform] from the Push IO Manager dashboard.</li>
+</ul><p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/files.png" alt="Downloads"></p>
+
+<ul>
+<li>Drag the PushIOManager.framework bundle into your project. Be sure to click “Copy items into destination group’s folder”</li>
+</ul><p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/copyitems.png" alt="Copy items dialogue"></p>
+
+<ul>
+<li>Drag pushio_config.json file to your project. A great location is in the same place your AppDelegate class is stored.<br>
+</li>
+</ul><blockquote>
+<p>The pushio_config.json must be in your application bundle in order for the PushIOManager read your API key and properly connect to the backend service.</p>
+</blockquote>
+
+<ul>
+<li>Import the PushIOManager header file in your AppDelegate.h</li>
+</ul><div class="highlight"><pre><span class="cp">#import &lt;PushIOManager/PushIOManager.h&gt;</span>
+</pre></div>
+
+<ul>
+<li>Declare the PushIOManagerDelegate in your app your AppDelegate.h</li>
+</ul><div class="highlight"><pre><span class="k">@interface</span> <span class="nc">AppDelegate</span> : <span class="nc">UIResponder</span> <span class="o">&lt;</span><span class="n">UIApplicationDelegate</span><span class="p">,</span> <span class="n">PushIOManagerDelegate</span><span class="o">&gt;</span>
+</pre></div>
+
+<ul>
+<li>Integrate the PushIOManager into your application lifecycle in AppDelegate.m</li>
+</ul><div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">launchOptions</span>
+<span class="p">{</span>
+    <span class="c1">// Initial setup</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">setDelegate:</span><span class="n">self</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="n">launchOptions</span><span class="p">];</span>
+
+    <span class="c1">// Requests a device token from Apple</span>
+    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="nl">registerForRemoteNotificationTypes:</span><span class="n">UIRemoteNotificationTypeAlert</span>     <span class="o">|</span> <span class="n">UIRemoteNotificationTypeBadge</span> <span class="o">|</span> <span class="n">UIRemoteNotificationTypeSound</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>Implement the Apple Push Notification Service callbacks</li>
+</ul><div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didRegisterForRemoteNotificationsWithDeviceToken:</span>    
+<span class="p">(</span><span class="n">NSData</span> <span class="o">*</span><span class="p">)</span><span class="nv">deviceToken</span>
+<span class="p">{</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didRegisterForRemoteNotificationsWithDeviceToken:</span><span class="n">deviceToken</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFailToRegisterForRemoteNotificationsWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="nv">error</span>
+<span class="p">{</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didFailToRegisterForRemoteNotificationsWithError:</span><span class="n">error</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didReceiveRemoteNotification:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">userInfo</span>
+<span class="p">{</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didReceiveRemoteNotification:</span><span class="n">userInfo</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>Implement PushIOManager delegate protocol </li>
+</ul><div class="highlight"><pre><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">readyForRegistration</span>
+<span class="p">{</span>
+   <span class="c1">// If this method is called back, PushIOManager has a proper device token</span>
+   <span class="c1">// so now you are ready to register.</span>
+<span class="p">}</span>
+
+<span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">registrationSucceeded</span>
+<span class="p">{</span>
+   <span class="c1">// Push IO registration was successful</span>
+<span class="p">}</span>
+
+<span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">registrationFailedWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="n">error</span> <span class="nl">statusCode:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">statusCode</span>
+<span class="p">{</span>
+   <span class="c1">// Push IO registration failed</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>Register with Push IO
+You can register a device with Push IO in at least two ways. First, if your application gives users a way to specify a preference or favorite, you may want to register for that category so that you can you push to them relevant content.</li>
+</ul><p>This kind of registration would be tied to a UI action, such as a UISwitch on/off action.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/switches.png" alt="UISwitch registration"></p>
+
+<div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">switchAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+<span class="p">{</span>
+     <span class="n">UISwitch</span> <span class="o">*</span><span class="n">mySwitch</span> <span class="o">=</span> <span class="p">(</span><span class="n">UISwitch</span> <span class="o">*</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+
+     <span class="k">if</span> <span class="p">(</span><span class="n">mySwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">==</span> <span class="n">YES</span><span class="p">)</span>
+     <span class="p">{</span>
+        <span class="c1">// Register for US Headlines</span>
+        <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">registerCategory:</span><span class="s">@"US"</span><span class="p">];</span>
+     <span class="p">}</span>
+     <span class="k">else</span>
+     <span class="p">{</span>
+        <span class="c1">// Unregister for US Headlines</span>
+        <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">unregisterCategory:</span><span class="s">@"US"</span><span class="p">];</span>
+      <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>If you just want to be able to broadcast to all your users at once, you can register more generically.</p>
+
+<div class="highlight"><pre><span class="c1">// Register device, so broadcasts can be sent to the user.</span>
+<span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">registerWithPushIO</span><span class="p">];</span>
+
+<span class="c1">// Unregister device entirely from Push IO.</span>
+<span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">unregisterWithPushIO</span><span class="p">];</span>
+</pre></div>
+
+<p>You can ask PushIOManager if a category is registered, to help configure your UI.</p>
+
+<div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">viewWillAppear</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="n">super</span> <span class="n">viewWillAppear</span><span class="p">];</span>
+
+    <span class="c1">// Set UI switches based upon Push IO registration status</span>
+    <span class="n">_usSwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">isRegisteredForCategory:</span><span class="s">@"US"</span><span class="p">];</span>
+    <span class="n">_sportsSwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">isRegisteredForCategory:</span><span class="s">@"Sports"</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Congratulations, that's all there is to it! You should now be ready to test your iOS integration. Be sure to install an Ad-Hoc build of your app, as Push IO only supports Apple's Production APNS environment.</p>
+
+<p>If you need further assistance, please visit our <a href="http://pushio.zendesk.com">support site</a>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/pushio">pushio</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-16817212-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
