@@ -5,10 +5,10 @@
 * [Integration Guide](http://docs.push.io/PushIOManager_iOS/)
 
 ## Push IO Resources
-* [Sign Up] (https://manage.push.io)  
-* [Documention] (http://docs.push.io)  
+* [Docs] (http://docs.push.io)  
 * [Support] (http://pushio.zendesk.com)  
-* [Billing Questions] (mailto:sales@push.io)  
+* [Billing] (mailto:sales@push.io?subject=Push IO billing inquiry)  
+* [Sign Up] (https://manage.push.io)  
 
 Copyright © 2009 - 2012 Push IO LLC. All Rights Reserved.  
 Push IO® is a registered trademark in the United States. All other trademarks are the property of their respective owners.
