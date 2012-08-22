@@ -74,6 +74,94 @@ Boulder, CO 80302 USA<br>
 
 <p>A device specially registered with Push IO to help you troubleshoot, test, and preview push notifications. </p>
 
+<h2>Getting Started with Push IO</h2>
+
+<p>Before you get started with integration of Push IO into your app code, you need to create an account and do a few setup steps via our web management dashboard.</p>
+
+<h4>Sign Up</h4>
+
+<p>To create your account with Push IO, go to our <a href="https://manage.push.io/auth/invitation/new">new user sign up</a> page. All it takes to get started is an email address, and confirmation that you agree to our <a href="http://www.push.io/legal/tos/">terms of service</a>, <a href="http://www.push.io/legal/privacy/">privacy policy</a>, and <a href="http://www.push.io/legal/agreement/">services agreement</a>.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/signup.png" alt="Sign up"></p>
+
+<p>After you click the "Sign Up" button, an activation email will be sent to you. Click the activation link found in the email and you will be directed to a page to continue the process by setting a password.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/welcome_email.png" alt="Welcome email"></p>
+
+<h4>Welcome to Push IO</h4>
+
+<p>After setting your password, account creation is complete. You will be directed to our new user welcome page. We built the welcome page has three simple steps. </p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/welcome_page.png" alt="Welcome page"></p>
+
+<ol>
+<li>Download the Push IO Mobile Dashboard for your mobile device</li>
+<li>Send yourself a Test Push</li>
+<li>Add your first app </li>
+</ol><p>The first two steps are very are very related. Without doing any integration, we want you to be able to send yourself a test push that shows our platform successfully delivering notifications to your device. In order to achieve this first push, we've published a Push IO Mobile Dashboard companion app on the <a href="http://itunes.apple.com/us/app/push-io-mobile-dashboard/id547681215?mt=8">App Store</a>, <a href="https://play.google.com/store/apps/details?id=com.pushio.dashboard">Google Play</a>, and the Windows Phone marketplace. </p>
+
+<p>Once you install the Push IO Mobile Dashboard, sign in with the Push IO account you just created.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/mobiledashboard_signin.png" alt="Mobile Dashboard sign in"></p>
+
+<p>After you have signed in, you should see a status message in the app that says:</p>
+
+<blockquote>
+<p>Ready to receive push notifications</p>
+</blockquote>
+
+<p>This is your signal that it's time to have a little fun. You can send yourself a test push saying whatever you'd like. This message will only go to any device(s) you have installed the Mobile Dashboard and signed into your Push IO account.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/test_push.png" alt="Test Push"></p>
+
+<p>Just like that, you've sent yourself a Test Push via Push IO.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/first_push.png" alt="Test Push Received"></p>
+
+<blockquote>
+<p>The Push IO Mobile Dashboard will also offer a list of your apps and some basic stats in your pocket. In the future, we'll be adding even more features so you can get the most out of Push IO even on the go.</p>
+</blockquote>
+
+<h4>Setting Up Your App</h4>
+
+<p>Next up, tell us the name of the first app you'd like to integrate with Push IO. In case you're wondering, you can also add more apps in the future. This step is just to get the first app created in our system.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/first_app_news.png" alt="Add an App"></p>
+
+<h4>Configure an iOS Platform</h4>
+
+<p>After creating your app, you are navigated to our primary management interface. There are three main taps at the top:</p>
+
+<ul>
+<li>Push</li>
+<li>Analytics</li>
+<li>Set Up</li>
+</ul><p>We'll start out in the Set Up section, where "+ Add Platform" is selected in the sidebar on the left. Push IO communicates with iOS, Android, and Windows Phone devices a little bit differently. In order to push to each platform, there are some platform-specific setup steps.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/add_plat.png" alt="Add a Platform"></p>
+
+<p>For the purpose of this guide, we'll cover setting up an iOS platform. You can follow a similar process for Android and Windows Phone, which is covered in those platforms' integration guides.</p>
+
+<p>To add an iOS platform, go ahead and click the iOS button. You will be shown a simple iOS setup screen, where you need to upload a .pem file, which is required by Apple so we can send push notifications to your app.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/add_plat_ios.png" alt="Add a Platform iOS"></p>
+
+<h4>The .pem File</h4>
+
+<p>The .pem file may also be referred to as a Production Push SSL certificate. It is created via Apple's iOS Provisioning Portal. This process can be a bit tricky, so we have an article on <a href="https://pushio.zendesk.com/entries/21644287-generating-a-pem-file-for-ios">generating the pem file</a>.</p>
+
+<p>After you've generated the .pem file per that document, click the "Choose File" button to select and upload to Push IO. </p>
+
+<blockquote>
+<p>Now would also be a good time to re-generate your Ad-Hoc Provisioning Profile so that your app will be push enabled the next time you do an Ad-Hoc build. To send push notifications to iOS devices via Push IO, you must be running an Ad-Hoc or App Store build. We do not support sending to Development builds at this time.</p>
+</blockquote>
+
+<h4>Download the PushIOManager for iOS</h4>
+
+<p>You're now very close to integration Push IO with your iOS project. First, you need to download our iOS PushIOManager and a configuration file called pushio_config.json. Both downloads are available from the Set Up section of the management dashboard, under your iOS platform page.</p>
+
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/platformdetail.png" alt="Platform download"></p>
+
 <h2>App Integration</h2>
 
 <h4>Overview</h4>
@@ -83,20 +171,6 @@ Boulder, CO 80302 USA<br>
 <p>The library provides simple methods for registering so Push IO can send push notifications to a device via the platform gateway. The library also provides interfaces for segmenting your users into groups called categories. This allows you to send targeted push notifications only to those users who have expressed an interest in <em>bird watching</em>, and then perhaps only users who are interested in <em>robins</em>.</p>
 
 <p>Push IO is the only push notification provider which provides data that allows you to understand how push notification engagement leads your users to high-value actions like in-app purchases, premium content viewing, and more. The PushIOManager library provides a simple mechanism to capture this push conversion information, which is available to you via the <a href="https://manage.push.io">Push IO Manager</a> dashboard.</p>
-
-<h4>Integration Prerequisites</h4>
-
-<p>Before continuing, be sure you have what you need to integrate Push IO into your app.</p>
-
-<ol>
-<li>Sign Up for a Push IO account at <a href="https://manage.push.io">https://manage.push.io</a>
-</li>
-<li>Download our Push IO Mobile Dashboard app to easily send your first push!</li>
-<li>Setup your app and add an iOS platform at <a href="https://manage.push.io">https://manage.push.io</a>
-</li>
-<li>Downloaded PushIOManager for iOS and pushio_config.json from <a href="https://manage.push.io">Set Up &gt; iOS</a>
-</li>
-</ol><p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/platformdetail.png" alt="Platform download"></p>
 
 <p>All set? Now you’re ready to integrate Push IO into your app!</p>
 
@@ -187,7 +261,8 @@ You can register a device with Push IO in at least two ways. First, if your appl
 
 <p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/switches.png" alt="UISwitch registration"></p>
 
-<div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">switchAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+<div class="highlight"><pre>
+<span class="k">-</span> <span class="p">(</span><span class="kt">IBAction</span><span class="p">)</span><span class="nf">switchAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
 <span class="p">{</span>
      <span class="n">UISwitch</span> <span class="o">*</span><span class="n">mySwitch</span> <span class="o">=</span> <span class="p">(</span><span class="n">UISwitch</span> <span class="o">*</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
 
