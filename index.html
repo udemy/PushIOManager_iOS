@@ -300,6 +300,51 @@ You can register a device with Push IO in at least two ways. First, if your appl
 <span class="p">}</span>
 </pre></div>
 
+<h4>Newsstand Integration</h4>
+
+<p>If your app is a Newsstand app, you need a few extra items in your App Delegate. These additions ensure that your app will receive special Newsstand notifications to trigger new content background downloads.</p>
+
+<pre><code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [[PushIOManager sharedInstance] setDelegate:self];
+    [[PushIOManager sharedInstance] didFinishLaunchingWithOptions:launchOptions];
+
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|&lt;b&gt;UIRemoteNotificationTypeNewsstandContentAvailability&lt;/b&gt;];
+
+    // If set during testing, Apple will not enforce the one-update-per-24-hours push notification for content updates. 
+    // IMPORTANT: If you keep this code in your App Store submission build, your app WILL be rejected.
+
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
+
+    return YES;
+}
+</code></pre>
+
+<p>The PushIOManager also supports an optional protocol method that gets called back when your app received a "content-update" push notification. In this method download your new content, which will happen in the background.</p>
+
+<pre><code>- (void)newNewsstandContentAvailable
+{
+    // Download your content here.
+    NSLog(@"Push IO new newstand content available");
+}
+</code></pre>
+
+<h4>Debugging PushIOManager</h4>
+
+<p>PushIOManager supports several debug levels which control how verbose the library is when logging to the console. Setting a debug level may help troubleshoot. Available debug levels are:</p>
+
+<blockquote>
+<p>PUSHIO_DEBUG_NONE   (default)<br>
+PUSHIO_DEBUG_ERRORS_ONLY<br>
+PUSHIO_DEBUG_ACTIVITY<br>
+PUSHIO_DEBUG_VERBOSE  </p>
+</blockquote>
+
+<p>To set a debug level, simply add a line like the following your in App Delegate:</p>
+
+<pre><code>    [[PushIOManager sharedInstance] setDebugLevel:PUSHIO_DEBUG_ERRORS_ONLY];
+</code></pre>
+
 <p>Congratulations, that's all there is to it! You should now be ready to test your iOS integration. Be sure to install an Ad-Hoc build of your app, as Push IO only supports Apple's Production APNS environment.</p>
 
 <p>If you need further assistance, please visit our <a href="http://pushio.zendesk.com">support site</a>.</p>
