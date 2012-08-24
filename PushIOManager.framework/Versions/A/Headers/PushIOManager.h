@@ -24,6 +24,8 @@
 - (void)readyForRegistration;
 - (void)registrationSucceeded;
 - (void)registrationFailedWithError:(NSError *)error statusCode:(int)statusCode;
+@optional
+- (void)newNewsstandContentAvailable;
 @end
 
 
