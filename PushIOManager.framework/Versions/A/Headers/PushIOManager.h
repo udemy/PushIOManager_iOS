@@ -5,7 +5,7 @@
 //  Copyright (c) 2009-2012 Push IO LLC. All rights reserved.
 //
 
-// This version of the PushIOManager library is 2.0.1
+// This version of the PushIOManager library is 2.0.2
 
 #import <Foundation/Foundation.h>
 
@@ -24,6 +24,8 @@
 - (void)readyForRegistration;
 - (void)registrationSucceeded;
 - (void)registrationFailedWithError:(NSError *)error statusCode:(int)statusCode;
+@optional
+- (void)newNewsstandContentAvailable;
 @end
 
 
