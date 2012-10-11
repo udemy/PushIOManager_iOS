@@ -7,7 +7,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import "PushIOManager.h"
-#import "PushiOManager+PushTrackers.h"
+#import "PushiOManager+PushIOTrackers.h"
 
 // If you are a delegate of PushIOManager, you will also be signed up for these callbacks also.
 @protocol PushiOManagerLocationDelegate <NSObject>

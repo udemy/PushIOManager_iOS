@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#include <UIKit/UIKit.h>
+//#include <UIKit/UIKit.h>
 #include <ifaddrs.h>
 #include <net/if_dl.h>
 #include <sys/socket.h>

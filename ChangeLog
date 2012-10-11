@@ -1,0 +1,8 @@
+* Mon Oct 11, 2012 - 2.0.4
+- Improved tracker implementation
+
+* Mon Oct 8, 2012 - 2.0.3	
+- Fix a bug in the unregisterFromPushIO method
+- Improved engagement transmission
+- Initial support for trackers
+- Added a ChangeLog
