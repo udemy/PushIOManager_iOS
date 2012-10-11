@@ -194,7 +194,8 @@ Boulder, CO 80302 USA<br>
 </blockquote>
 
 <ul>
-<li>Import the PushIOManager header file in your AppDelegate.h</li>
+<li>Copy the code below (PushIOManager header file) and paste into your AppDelegate.h on a separate line underneath the UIKit header import statement.<br>
+</li>
 </ul><div class="highlight"><pre><span class="cp">#import &lt;PushIOManager/PushIOManager.h&gt;</span>
 </pre></div>
 
@@ -237,18 +238,18 @@ Boulder, CO 80302 USA<br>
 
 <ul>
 <li>Implement PushIOManager delegate protocol </li>
-</ul><div class="highlight"><pre><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">readyForRegistration</span>
+</ul><div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">readyForRegistration</span>
 <span class="p">{</span>
    <span class="c1">// If this method is called back, PushIOManager has a proper device token</span>
    <span class="c1">// so now you are ready to register.</span>
 <span class="p">}</span>
 
-<span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">registrationSucceeded</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">registrationSucceeded</span>
 <span class="p">{</span>
    <span class="c1">// Push IO registration was successful</span>
 <span class="p">}</span>
 
-<span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">registrationFailedWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="n">error</span> <span class="nl">statusCode:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">statusCode</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">registrationFailedWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="nv">error</span> <span class="nf">statusCode:</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nv">statusCode</span>
 <span class="p">{</span>
    <span class="c1">// Push IO registration failed</span>
 <span class="p">}</span>
