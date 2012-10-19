@@ -150,7 +150,7 @@ Boulder, CO 80302 USA<br>
 
 <p>The .pem file may also be referred to as a Production Push SSL certificate. It is created via Apple's iOS Provisioning Portal. This process can be a bit tricky, so we have an article on <a href="https://pushio.zendesk.com/entries/21644287-generating-a-pem-file-for-ios">generating the pem file</a>.</p>
 
-<p>After you've generated the .pem file per that document, click the "Choose File" button to select and upload to Push IO. </p>
+<p>After you've generated the .pem file per that document, navigate to the manage.push.io page and select your previously created app OR add your app under "Platform". Click the "Choose File" button to select and upload your .pem. </p>
 
 <blockquote>
 <p>Now would also be a good time to re-generate your Ad-Hoc Provisioning Profile so that your app will be push enabled the next time you do an Ad-Hoc build. To send push notifications to iOS devices via Push IO, you must be running an Ad-Hoc or App Store build. We do not support sending to Development builds at this time.</p>
@@ -159,6 +159,8 @@ Boulder, CO 80302 USA<br>
 <h4>Download the PushIOManager for iOS</h4>
 
 <p>You're now very close to integration Push IO with your iOS project. First, you need to download our iOS PushIOManager and a configuration file called pushio_config.json. Both downloads are available from the Set Up section of the management dashboard, under your iOS platform page.</p>
+
+<p>You can double check your pushio_config.json file in Xcode by making sure the API key listed matches your app's API key on the manage.push.io dashboard.</p>
 
 <p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/platformdetail.png" alt="Platform download"></p>
 
@@ -421,7 +423,7 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 
 <p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/mobileprovision.png" alt="Mobile Provision"></p>
 
-<p>If the value is "development" and not "production", you will not receive push notifications. Push IO only supports delivery of push notifications via Apple's production push service.</p>
+<p>If the value is "development" and not "production"/"distribution", you will not receive push notifications. Push IO only supports delivery of push notifications via Apple's production push service.</p>
 
 <h3>Oh, that rotten .pem file!</h3>
 
@@ -429,19 +431,21 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 
 <h4>Debugging PushIOManager</h4>
 
-<p>PushIOManager supports several debug levels which control how verbose the library is when logging to the console. Setting a debug level may help troubleshoot. Available debug levels are:</p>
+<p>PushIOManager supports several debug levels which control how verbose the library is when logging to the console. Setting a debug level may help troubleshoot. </p>
+
+<p>To set a debug level, simply add a line like the following your in AppDelegate.m directly under "//Initial setup"</p>
+
+<div class="highlight"><pre>    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">setDebugLevel:</span><span class="n">PUSHIO_DEBUG_ERRORS_ONLY</span><span class="p">];</span>
+</pre></div>
+
+<p>Available debug levels are:</p>
 
 <blockquote>
 <p>PUSHIO_DEBUG_NONE   (default)<br>
 PUSHIO_DEBUG_ERRORS_ONLY<br>
 PUSHIO_DEBUG_ACTIVITY<br>
-PUSHIO_DEBUG_VERBOSE  </p>
+PUSHIO_DEBUG_VERBOSE </p>
 </blockquote>
-
-<p>To set a debug level, simply add a line like the following your in App Delegate:</p>
-
-<div class="highlight"><pre>    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">setDebugLevel:</span><span class="n">PUSHIO_DEBUG_ERRORS_ONLY</span><span class="p">];</span>
-</pre></div>
 
 <h2>Support</h2>
 
