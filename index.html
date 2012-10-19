@@ -423,11 +423,14 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 
 <p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/mobileprovision.png" alt="Mobile Provision"></p>
 
-<p>If the value is "development" and not "production"/"distribution", you will not receive push notifications. Push IO only supports delivery of push notifications via Apple's production push service.</p>
+<p>If the value is "development" and not "production", you will not receive push notifications. Push IO only supports delivery of push notifications via Apple's production push service.</p>
 
 <h3>Oh, that rotten .pem file!</h3>
 
-<p>The process of created a .pem file can be the hardest part of getting push notifications up and running. Double check that you've followed the steps outlined in our article on <a href="https://pushio.zendesk.com/entries/21644287-generating-a-pem-file-for-ios">generating the pem file</a>.</p>
+<p>The process of created a .pem file can be the hardest part of getting push notifications up and running. 
+Once your .pem is created, a simple way to check if it is correct, is to open the .pem in TextEdit and make sure the Bag Attribute shows "friendlyName: Apple Production IOS Push Services: com.yourcompany.MyPushApp".</p>
+
+<p>Also, double check that you've followed the steps outlined in our article on <a href="https://pushio.zendesk.com/entries/21644287-generating-a-pem-file-for-ios">generating the pem file</a>. </p>
 
 <h4>Debugging PushIOManager</h4>
 
