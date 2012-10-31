@@ -7,7 +7,7 @@
 	<key>UINewsstandApp</key>
 	<true/>
 	<key>CFBundleDisplayName</key>
-	<string>Push IO News</string>
+	<string>News</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>

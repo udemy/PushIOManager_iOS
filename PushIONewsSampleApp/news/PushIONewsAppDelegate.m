@@ -31,6 +31,26 @@
     return YES;
 }
 
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [[PushIOManager sharedInstance] setDelegate:self];
+    [[PushIOManager sharedInstance] didFinishLaunchingWithOptions:launchOptions];
+    [[PushIOManager sharedInstance] setDebugLevel:PUSHIO_DEBUG_VERBOSE];
+    
+    
+    BOOL pushEnabled = [[[NSUserDefaults standardUserDefaults] valueForKey:@"PIONews_All"] boolValue];
+    
+    if (pushEnabled == YES)
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeNewsstandContentAvailability];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NKDontThrottleNewsstandContentNotifications"];
+    }
+    
+    return YES;
+}
+
 #pragma mark APNS
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
