@@ -1,6 +1,6 @@
 ![Push IO – We Push Your Notifications](http://push.io/wp-content/uploads/2012/05/pushio_logo.png)
 
-## PushIOManager for iOS
+## PushIOManager for iOS - Version 1.3.0
 
 * [Integration Guide](http://docs.push.io/PushIOManager_iOS/)
 

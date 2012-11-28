@@ -21,11 +21,20 @@
 
 
 @protocol PushIOManagerDelegate <NSObject>
+@optional
+
+// PushIO manager has a valid token and is ready to send a registration to the PushIO servers.
 - (void)readyForRegistration;
+
+// Status of registration calls.  Registration is called after a token is received, or when categories/trackers change.
 - (void)registrationSucceeded;
 - (void)registrationFailedWithError:(NSError *)error statusCode:(int)statusCode;
-@optional
+
+// In processing a push we found that new Newsstand content is ready.
 - (void)newNewsstandContentAvailable;
+
+// PushIOManager has extracted a push dictionary, the metadata is ready to be retrieved.
+- (void)pushProcessed;
 @end
 
 
@@ -129,6 +138,9 @@ typedef enum  {
 // Currently in-use Push IO api settings
 - (NSString *) pushIOAPIHost;
 - (NSString *) pushIOAPIKey;
+
+// If you want to use a different API key from the one in the pushio_config.json, set this property.
+@property (nonatomic, retain) NSString *overridePushIOAPIKey;
 
 // A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io
 // This call will always return a non-null value.
