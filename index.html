@@ -381,7 +381,7 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
     <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">setDelegate:</span><span class="n">self</span><span class="p">];</span>
     <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="n">launchOptions</span><span class="p">];</span>
 
-    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="nl">registerForRemoteNotificationTypes:</span><span class="n">UIRemoteNotificationTypeAlert</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeBadge</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeSound</span><span class="o">|&lt;</span><span class="n">b</span><span class="o">&gt;</span><span class="n">UIRemoteNotificationTypeNewsstandContentAvailability</span><span class="o">&lt;/</span><span class="n">b</span><span class="o">&gt;</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="nl">registerForRemoteNotificationTypes:</span><span class="n">UIRemoteNotificationTypeAlert</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeBadge</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeSound</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeNewsstandContentAvailability</span><span class="p">];</span>
 
     <span class="c1">// If set during testing, Apple will not enforce the one-update-per-24-hours push notification for content updates. </span>
     <span class="c1">// IMPORTANT: If you keep this code in your App Store submission build, your app WILL be rejected.</span>
@@ -402,6 +402,10 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 </pre></div>
 
 <h2>Troubleshooting</h2>
+
+<h4>Debugging Checklist</h4>
+
+<p>As you debug your implementation, please refer to our <img src="https://pushio.zendesk.com/entries/22070511-troubleshooting-checklist" alt="troubleshooting checklist"> for helpful gotchas to watch out for.</p>
 
 <h4>Ad-Hoc Builds Only</h4>
 
