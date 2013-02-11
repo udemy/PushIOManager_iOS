@@ -193,7 +193,17 @@ Boulder, CO 80302 USA<br>
 </li>
 </ul><blockquote>
 <p>The pushio_config.json must be in your application bundle in order for the PushIOManager read your API key and properly connect to the backend service.</p>
+
+<p>Next, add the CoreLocation framework to your project:</p>
+
+<ul>
+<li>Go to your project in the Project Navigator, then to your application target.</li>
+<li>Click on "Build Phases", then "Link Library With Binaries".</li>
+<li>Click on "+" below the list of existing frameworks, and add "CoreLocation.framework" from the list that appears.</li>
+</ul>
 </blockquote>
+
+<p>Push IO use of CoreLocation is optional and not required, but many third party libraries require that the linker flags "-all_load -ObjC" be used.  In that case the CoreLocation library must be included, even if not used.</p>
 
 <ul>
 <li>Copy the code below (PushIOManager header file) and paste into your AppDelegate.h on a separate line underneath the UIKit header import statement.<br>
