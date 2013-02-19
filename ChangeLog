@@ -1,3 +1,8 @@
+* Tue Feb 19th - 2.0.7
+- Suspending app now finishes any pending registrations or engagements
+	in background.
+- Limited retries when initial registration fails.
+- Added access to last engagement ID.
 * Wed Nov 28, 2012 - 2.0.5
 - Improved engagement tracking
 - More robust registration process
