@@ -1,4 +1,4 @@
-* Tue Feb 19th - 2.0.7
+* Tue Feb 19th, 2013 - 2.0.7
 - Suspending app now finishes any pending registrations or engagements
 	in background.
 - Limited retries when initial registration fails.
