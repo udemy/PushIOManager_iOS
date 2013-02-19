@@ -73,6 +73,10 @@ typedef enum  {
 // This gives you the entire push dictionary above the APS level, along with other meta values that may have been sent in the push.
 @property (nonatomic, strong) NSDictionary *lastPushMeta;
 
+// Each push received includes a unique engagementID that replates to that specific push.  Here you can find what the last
+// such ID was and make use of it if needed.
+@property (nonatomic, copy, readonly) NSString *lastEngagementID;
+
 
 //
 // Setup
