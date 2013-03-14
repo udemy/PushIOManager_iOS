@@ -30,7 +30,7 @@
       <section>
         <p><img src="http://push.io/wp-content/uploads/2012/05/pushio_logo.png" alt="Push IO®"></p>
 
-<p>Copyright © 2009 - 2012 Push IO LLC. All Rights Reserved.<br>
+<p>Copyright © 2009 - 2013 Push IO LLC. All Rights Reserved.<br>
 Push IO® is a registered trademark in the United States. All other trademarks are the property of their respective owners.</p>
 
 <h4>Software License Information</h4>
@@ -58,6 +58,10 @@ Boulder, CO 80302 USA<br>
 
 <h2>Definitions</h2>
 
+<h4>Platform</h4>
+
+<p>Your app may be available on multiple platforms such as iOS, Android, Windows Phone, etc. An app on Push IO can have multiple platforms, allowing you to push once and target all your users regardless of operating system.</p>
+
 <h4>UUID</h4>
 
 <p>A unique identifier corresponding to a specific device that is used to register with the Push IO service.</p>
@@ -69,10 +73,6 @@ Boulder, CO 80302 USA<br>
 <h4>Audience</h4>
 
 <p>An audience defines a group of users based on one or more categories or platforms. For example, you might make an audience out of all of the users who have registered to a category for a team in the Western Conference who are using your app on iOS.</p>
-
-<h4>Test Device</h4>
-
-<p>A device specially registered with Push IO to help you troubleshoot, test, and preview push notifications. </p>
 
 <h2>Getting Started with Push IO</h2>
 
@@ -140,27 +140,36 @@ Boulder, CO 80302 USA<br>
 
 <p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/add_plat.png" alt="Add a Platform"></p>
 
-<p>For the purpose of this guide, we'll cover setting up an iOS platform. You can follow a similar process for Android and Windows Phone, which is covered in those platforms' integration guides.</p>
+<p>For the purpose of this guide, we'll cover setting up your iOS app. You can follow a similar process for other supported platforms in their respective integration guides.</p>
 
-<p>To add an iOS platform, go ahead and click the iOS button. You will be shown a simple iOS setup screen, where you need to upload a .pem file, which is required by Apple so we can send push notifications to your app.</p>
+<h4>Add a iOS Development platform</h4>
 
-<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/add_plat_ios.png" alt="Add a Platform iOS"></p>
+<p>For your initial Push IO integration, you'll want to setup an iOS Development platform. This will allow you to use a development provisioning profile so you can easily deploy and debug on your device. This is important, since iOS push notifications are not available in the simulator.</p>
 
-<h4>The .pem File</h4>
+<p>To add an iOS Development platform, click the button labeled "iOS Dev".  </p>
 
-<p>The .pem file may also be referred to as a Production Push SSL certificate. It is created via Apple's iOS Provisioning Portal. This process can be a bit tricky, so we have an article on <a href="https://pushio.zendesk.com/entries/21644287-generating-a-pem-file-for-ios">generating the pem file</a> and a <a href="http://www.youtube.com/watch?v=kF_tM9xxT_8&amp;feature=plcp">Video Tutorial</a> located on our <a href="http://www.youtube.com/user/PushIOSupport">Push IO Support YouTube channel</a>.</p>
+<p>You will be shown a simple iOS setup screen, where you need to upload a your Development Push SSL Certificate in ".pem" format. Push IO uses the .pem file to open a connection to Apple's Push Notification Service on behalf of your app.</p>
 
-<p>After you've generated the .pem file per that document, navigate to the manage.push.io page and select your previously created app OR add your app under "Platform". Click the "Choose File" button to select and upload your .pem. </p>
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/add_plat_iosdev.png" alt="Add a Platform iOS"></p>
+
+<h4>The Push SSL Certificate</h4>
+
+<p>Also know as a ".pem" file, a Push SSL Certificate is created via Apple's iOS Provisioning Portal. At this stage, you will only need to create the Development Push SSL Certificate since you aren't ready to ship your app. </p>
+
+<p>This process can be a bit tricky, so we have an article on <a href="https://pushio.zendesk.com/entries/21644287-generating-a-pem-file-for-ios">generating the pem file</a> and a <a href="http://www.youtube.com/watch?v=kF_tM9xxT_8&amp;feature=plcp">Video Tutorial</a> located on our <a href="http://www.youtube.com/user/PushIOSupport">Push IO Support YouTube channel</a>.</p>
+
+<p>After you've generated the .pem file per that document, switch back to the Push IO management interface. You should be in the Set Up section, with the iOS Dev platform selected.
+Click the "Choose File" button to select and upload your .pem. </p>
 
 <blockquote>
-<p>Now would also be a good time to re-generate your Ad-Hoc Provisioning Profile so that your app will be push enabled the next time you do an Ad-Hoc build. To send push notifications to iOS devices via Push IO, you must be running an Ad-Hoc or App Store build. We do not support sending to Development builds at this time.</p>
+<p>Before you proceed, be sure to re-generate your Developer Provisioning Profile so that your app will be push enabled the next time you build to your device. </p>
 </blockquote>
 
 <h4>Download the PushIOManager for iOS</h4>
 
-<p>You're now very close to integration Push IO with your iOS project. First, you need to download our iOS PushIOManager and a configuration file called pushio_config.json. Both downloads are available from the Set Up section of the management dashboard, under your iOS platform page.</p>
+<p>You're now very close to integration Push IO with your iOS project. First, you need to download our iOS PushIOManager and a configuration file called pushio_config_debug.json. Both downloads are available from the Set Up section of the management dashboard, under your iOS Dev platform page.</p>
 
-<p>You can double check your pushio_config.json file in TextEdit by checking your bundle_id and making sure the API key listed matches the API key on your app's manage.push.io dashboard.</p>
+<p>You can double check your pushio_config_debug.json file by opening the file in TextEdit. You should see a populated "bundleId" value that matches your app, as well as an "apiKey" value that matches what you see listed at your iOS Dev platform page.</p>
 
 <p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/platformdetail.png" alt="Platform download"></p>
 
@@ -189,10 +198,10 @@ Boulder, CO 80302 USA<br>
 </ul><p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/copyitems.png" alt="Copy items dialogue"></p>
 
 <ul>
-<li>Drag pushio_config.json file to your project. A great location is in the same place your AppDelegate class is stored.<br>
+<li>Drag pushio_config_debug.json file to your project. A great location is in the same place your AppDelegate class is stored.<br>
 </li>
 </ul><blockquote>
-<p>The pushio_config.json must be in your application bundle in order for the PushIOManager read your API key and properly connect to the backend service.</p>
+<p>The pushio_config_debug.json must be in your application bundle in order for the PushIOManager read your API key and properly connect to the backend service.</p>
 
 <p>Next, add the CoreLocation framework to your project:</p>
 
@@ -221,11 +230,11 @@ Boulder, CO 80302 USA<br>
 </ul><div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">launchOptions</span>
 <span class="p">{</span>
     <span class="c1">// Initial setup</span>
-    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">setDelegate:</span><span class="n">self</span><span class="p">];</span>
-    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="n">launchOptions</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">setDelegate</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">didFinishLaunchingWithOptions</span><span class="o">:</span><span class="n">launchOptions</span><span class="p">];</span>
 
     <span class="c1">// Requests a device token from Apple</span>
-    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="nl">registerForRemoteNotificationTypes:</span><span class="n">UIRemoteNotificationTypeAlert</span>     <span class="o">|</span> <span class="n">UIRemoteNotificationTypeBadge</span> <span class="o">|</span> <span class="n">UIRemoteNotificationTypeSound</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">registerForRemoteNotificationTypes</span><span class="o">:</span><span class="n">UIRemoteNotificationTypeAlert</span>     <span class="o">|</span> <span class="n">UIRemoteNotificationTypeBadge</span> <span class="o">|</span> <span class="n">UIRemoteNotificationTypeSound</span><span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -234,17 +243,17 @@ Boulder, CO 80302 USA<br>
 </ul><div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didRegisterForRemoteNotificationsWithDeviceToken:</span>    
 <span class="p">(</span><span class="n">NSData</span> <span class="o">*</span><span class="p">)</span><span class="nv">deviceToken</span>
 <span class="p">{</span>
-    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didRegisterForRemoteNotificationsWithDeviceToken:</span><span class="n">deviceToken</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">didRegisterForRemoteNotificationsWithDeviceToken</span><span class="o">:</span><span class="n">deviceToken</span><span class="p">];</span>
 <span class="p">}</span>
 
 <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFailToRegisterForRemoteNotificationsWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="nv">error</span>
 <span class="p">{</span>
-    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didFailToRegisterForRemoteNotificationsWithError:</span><span class="n">error</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">didFailToRegisterForRemoteNotificationsWithError</span><span class="o">:</span><span class="n">error</span><span class="p">];</span>
 <span class="p">}</span>
 
 <span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didReceiveRemoteNotification:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">userInfo</span>
 <span class="p">{</span>
-    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didReceiveRemoteNotification:</span><span class="n">userInfo</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">didReceiveRemoteNotification</span><span class="o">:</span><span class="n">userInfo</span><span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -279,15 +288,15 @@ You can register a device with Push IO in at least two ways. First, if your appl
 <span class="p">{</span>
      <span class="n">UISwitch</span> <span class="o">*</span><span class="n">mySwitch</span> <span class="o">=</span> <span class="p">(</span><span class="n">UISwitch</span> <span class="o">*</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
 
-     <span class="k">if</span> <span class="p">(</span><span class="n">mySwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">==</span> <span class="n">YES</span><span class="p">)</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">mySwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">==</span> <span class="nb">YES</span><span class="p">)</span>
      <span class="p">{</span>
         <span class="c1">// Register for US Headlines</span>
-        <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">registerCategory:</span><span class="s">@"US"</span><span class="p">];</span>
+        <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">registerCategory</span><span class="o">:</span><span class="s">@"US"</span><span class="p">];</span>
      <span class="p">}</span>
      <span class="k">else</span>
      <span class="p">{</span>
         <span class="c1">// Unregister for US Headlines</span>
-        <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">unregisterCategory:</span><span class="s">@"US"</span><span class="p">];</span>
+        <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">unregisterCategory</span><span class="o">:</span><span class="s">@"US"</span><span class="p">];</span>
       <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -312,38 +321,18 @@ You can register a device with Push IO in at least two ways. First, if your appl
     <span class="p">[</span><span class="n">super</span> <span class="n">viewWillAppear</span><span class="p">];</span>
 
     <span class="c1">// Set UI switches based upon Push IO registration status</span>
-    <span class="n">_usSwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">isRegisteredForCategory:</span><span class="s">@"US"</span><span class="p">];</span>
-    <span class="n">_sportsSwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">isRegisteredForCategory:</span><span class="s">@"Sports"</span><span class="p">];</span>
+    <span class="n">_usSwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">isRegisteredForCategory</span><span class="o">:</span><span class="s">@"US"</span><span class="p">];</span>
+    <span class="n">_sportsSwitch</span><span class="p">.</span><span class="n">on</span> <span class="o">=</span> <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">isRegisteredForCategory</span><span class="o">:</span><span class="s">@"Sports"</span><span class="p">];</span>
 <span class="p">}</span>
 </pre></div>
 
-<h4>Register a Test Device</h4>
+<h4>Ready. Set. Push!</h4>
 
-<p>Test devices are a great way to verify integration, preview notifications before they go-live, and use Push IO before you are in production. Sending to test devices does not require that you have a billing plan selected.</p>
+<p>Congratulations, you've integrated the PushIOManager! Now it's time to test your iOS integration. Login to the Push IO management dashboard, navigate to Push and choose "All App Subscribers" from the Audience drop down menu. Type in a message in the message text entry field, and click "Send Now".</p>
 
-<p>To register a test device, you need the Push IO unique identifier generated by the PushIOManager for your device. The library has a help method grab this value:</p>
+<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/ready_set_push.png" alt="Ready Set Push"></p>
 
-<div class="highlight"><pre><span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">pushIOUUID</span><span class="p">];</span>
-</pre></div>
-
-<p>Once you have this value, navigate to Set Up &gt; Audiences &gt; Test Devices at the Push IO management dashboard, and click "+ Add Device".</p>
-
-<p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/add_test_device.png" alt="Add Test Device"></p>
-
-<p>Once this is done, you can use the composer to send yourself a test push. </p>
-
-<h4>Send a Test Push</h4>
-
-<p>Congratulations, you've integrated the PushIOManager! Now it's time to test your iOS integration. Login to the Push IO management dashboard, navigate to Push and try sending to Test Devices. You can send to your registered Test Devices AND any device logged into the Push IO Mobile Dashboard. If integration was successful, you will receive two push notifications.</p>
-
-<ol>
-<li>To your app</li>
-<li>To the Push IO Mobile Dashboard</li>
-</ol><p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/two_test_pushes.png" alt="Two Test Pushes"></p>
-
-<p>If you only receive the Push IO Mobile Dashboard push, it's a clue that something was integrated incorrectly. See the troubleshooting section at the end of this document.</p>
-
-<h4>Engagement Metrics and Push Conversion</h4>
+<h4>Analytics Integration</h4>
 
 <p>Push IO is the only push notification provider that goes beyond simply telling you if your users are opening your app via a push notification. We provide you a simple integration to track engagement metrics.</p>
 
@@ -366,7 +355,7 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 
 <p>The code integration should occur when the action occurs. For example, after a successful in-app purchase, you would insert this line of code:</p>
 
-<div class="highlight"><pre><span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">trackEngagementMetric:</span><span class="n">PUSHIO_ENGAGEMENT_METRIC_INAPP_PURCHASE</span><span class="p">];</span>
+<div class="highlight"><pre><span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">trackEngagementMetric</span><span class="o">:</span><span class="n">PUSHIO_ENGAGEMENT_METRIC_INAPP_PURCHASE</span><span class="p">];</span>
 </pre></div>
 
 <p>Once this code is integrated, you'll start seeing Push Conversion metrics within the Analytics tab of the Push IO management dashboard.</p>
@@ -375,7 +364,7 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 
 <p>You can also track arbitrary custom actions, like when a use signs-up for your service:</p>
 
-<div class="highlight"><pre><span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">trackEngagementCustomMetric:</span><span class="s">@"SignUp"</span><span class="p">];</span>
+<div class="highlight"><pre><span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">trackEngagementCustomMetric</span><span class="o">:</span><span class="s">@"SignUp"</span><span class="p">];</span>
 </pre></div>
 
 <blockquote>
@@ -388,17 +377,17 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 
 <div class="highlight"><pre><span class="k">-</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">application:</span><span class="p">(</span><span class="n">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="nv">application</span> <span class="nf">didFinishLaunchingWithOptions:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">launchOptions</span>
 <span class="p">{</span>
-    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">setDelegate:</span><span class="n">self</span><span class="p">];</span>
-    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">didFinishLaunchingWithOptions:</span><span class="n">launchOptions</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">setDelegate</span><span class="o">:</span><span class="n">self</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">didFinishLaunchingWithOptions</span><span class="o">:</span><span class="n">launchOptions</span><span class="p">];</span>
 
-    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="nl">registerForRemoteNotificationTypes:</span><span class="n">UIRemoteNotificationTypeAlert</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeBadge</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeSound</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeNewsstandContentAvailability</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">registerForRemoteNotificationTypes</span><span class="o">:</span><span class="n">UIRemoteNotificationTypeAlert</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeBadge</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeSound</span><span class="o">|</span><span class="n">UIRemoteNotificationTypeNewsstandContentAvailability</span><span class="p">];</span>
 
     <span class="c1">// If set during testing, Apple will not enforce the one-update-per-24-hours push notification for content updates. </span>
     <span class="c1">// IMPORTANT: If you keep this code in your App Store submission build, your app WILL be rejected.</span>
 
-    <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">setBool:</span><span class="n">YES</span> <span class="nl">forKey:</span><span class="s">@"NKDontThrottleNewsstandContentNotifications"</span><span class="p">];</span>
+    <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="n">setBool</span><span class="o">:</span><span class="nb">YES</span> <span class="n">forKey</span><span class="o">:</span><span class="s">@"NKDontThrottleNewsstandContentNotifications"</span><span class="p">];</span>
 
-    <span class="k">return</span> <span class="n">YES</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">YES</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -411,23 +400,32 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 <span class="p">}</span>
 </pre></div>
 
+<h4>Ready for an Ad-Hoc and/or App Store Build?</h4>
+
+<p>Now that you have successfully integrated Push IO into your Development build, there's a few steps necessary to start pushing to your Ad-Hoc and/or App Store build.</p>
+
+<ul>
+<li>First, add a plain iOS (not "iOS Dev") platform to your app from the Set Up section of the management dashboard.</li>
+</ul><p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/add_plat_ios.png" alt="Add a Platform iOS"></p>
+
+<ul>
+<li><p>Next, you will need to generate and upload a Production Push .pem file.</p></li>
+<li><p>Lastly, download and add your "iOS" platform pushio_config.json to your project. This is the production config file, and will co-exist in your project along side the pushio_config_debug.json you added previously.</p></li>
+</ul><blockquote>
+<p>Make sure you re-generate your Ad-Hoc and App Store Provisioning Profiles so that your app will be enabled for Production Push.</p>
+</blockquote>
+
 <h2>Troubleshooting</h2>
 
 <h4>Debugging Checklist</h4>
 
-<p>As you debug your implementation, please refer to our <img src="https://pushio.zendesk.com/entries/22070511-troubleshooting-checklist" alt="troubleshooting checklist"> for helpful gotchas to watch out for.</p>
-
-<h4>Ad-Hoc Builds Only</h4>
-
-<p>Be sure to install an Ad-Hoc build of your app. Push IO only supports Apple's Production APNS environment, which is only available in Ad-Hoc or App Store builds. </p>
-
-<p>If you're testing with a Developer build of your app, you will not receive push notifications on your device.</p>
+<p>As you debug your implementation, please refer to our <a href="https://pushio.zendesk.com/entries/22070511-troubleshooting-checklist">troubleshooting checklist</a> for helpful gotchas to watch out for.</p>
 
 <h4>Provisioning Profiles</h4>
 
-<p>Be sure to re-generated your Ad-Hoc and App Store provisioning profiles after you enable production push and generate your .pem file. If you don't do this, your Ad-Hoc or App Store build will not be push enabled.</p>
+<p>Be sure to re-generate your Development, Ad-Hoc, and App Store provisioning profiles after you enable development and production push from Apple's Provisioning Portal. If you don't do this, your Development, Ad-Hoc, and/or App Store build will not be push enabled.</p>
 
-<p>When you launched your Ad-Hoc build for the first time post-integration, you should see a pop-up alert like this:</p>
+<p>When you launch your push enabled app for the first time, you should see a pop-up alert like this:</p>
 
 <p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/twitter_pushnotification.png" alt="Allow Push Notifications"></p>
 
@@ -436,8 +434,6 @@ PUSHIO_ENGAGEMENT_METRIC_OTHER            (other generic activity)  </p>
 <p>You can also open your provisioning profile(s) in TextEdit. If they are properly push enabled, you will see:</p>
 
 <p><img src="http://pushiocdn.s3.amazonaws.com/docs_assets/mobileprovision.png" alt="Mobile Provision"></p>
-
-<p>If the value is "development" and not "production", you will not receive push notifications. Push IO only supports delivery of push notifications via Apple's production push service.</p>
 
 <h3>Oh, that rotten .pem file!</h3>
 
@@ -452,7 +448,7 @@ Once your .pem is created, a simple way to check if it is correct, is to open th
 
 <p>To set a debug level, simply add a line like the following your in AppDelegate.m directly under "//Initial setup"</p>
 
-<div class="highlight"><pre>    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="nl">setDebugLevel:</span><span class="n">PUSHIO_DEBUG_ERRORS_ONLY</span><span class="p">];</span>
+<div class="highlight"><pre>    <span class="p">[[</span><span class="n">PushIOManager</span> <span class="n">sharedInstance</span><span class="p">]</span> <span class="n">setDebugLevel</span><span class="o">:</span><span class="n">PUSHIO_DEBUG_ERRORS_ONLY</span><span class="p">];</span>
 </pre></div>
 
 <p>Available debug levels are:</p>
