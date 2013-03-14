@@ -1,3 +1,6 @@
+* Thu Mar 14th, 2013 - 2.0.9
+- Support added for Development API keys and loading pushio_manager_debug.json.
+	
 * Thu Mar 7th, 2013 - 2.0.8
 - Blocks registration when using debug builds with ad-hoc pushio_manager.json.
 - Warning issued when running a build without push configured.
