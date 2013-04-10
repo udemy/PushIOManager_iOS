@@ -2,7 +2,7 @@
 //  PushIOManager.h
 //  PushIOManager
 //
-//  Copyright (c) 2009-2012 Push IO LLC. All rights reserved.
+//  Copyright (c) 2009-2013 Push IO inc. All rights reserved.
 //
 
 // This version of the PushIOManager library is 2.0.3
