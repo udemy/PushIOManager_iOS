@@ -37,6 +37,7 @@
 		EA1598F915C21A25005E28C4 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = EA1598EF15C21A25005E28C4 /* iTunesArtwork.png */; };
 		EA47E519160BE7650092EC51 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA47E518160BE7650092EC51 /* Default-568h@2x.png */; };
 		EA6CD641162E0E7300204C49 /* PushIOManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6CD640162E0E7300204C49 /* PushIOManager.framework */; };
+		EB23E6EE1715E10B00083E6A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB23E6ED1715E10B00083E6A /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		EA1598EF15C21A25005E28C4 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		EA47E518160BE7650092EC51 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		EA6CD640162E0E7300204C49 /* PushIOManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushIOManager.framework; sourceTree = "<group>"; };
+		EB23E6ED1715E10B00083E6A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB23E6EE1715E10B00083E6A /* CoreLocation.framework in Frameworks */,
 				EA1598A715C21648005E28C4 /* UIKit.framework in Frameworks */,
 				EA1598A915C21648005E28C4 /* Foundation.framework in Frameworks */,
 				EA1598AB15C21648005E28C4 /* CoreGraphics.framework in Frameworks */,
@@ -111,6 +114,7 @@
 		EA15989715C21648005E28C4 = {
 			isa = PBXGroup;
 			children = (
+				EB23E6ED1715E10B00083E6A /* CoreLocation.framework */,
 				EA47E518160BE7650092EC51 /* Default-568h@2x.png */,
 				EA1598EB15C21A25005E28C4 /* Icon-Small-50.png */,
 				EA1598EC15C21A25005E28C4 /* Icon-Small-100.png */,
