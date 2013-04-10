@@ -2,7 +2,7 @@
 //  PushIONewsAppDelegate.m
 //  news
 //
-//  Copyright (c) 2013 Push IO LLC. All rights reserved.
+//  Copyright (c) 2013 Push IO Inc. All rights reserved.
 //
 
 #import "PushIONewsAppDelegate.h"
