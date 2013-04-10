@@ -2,7 +2,7 @@
 //  PushIOCompatV1.h
 //  PushIOManager
 //
-//  Copyright (c) 2013 Push IO inc. All rights reserved.
+//  Copyright (c) 2013 Push IO Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
