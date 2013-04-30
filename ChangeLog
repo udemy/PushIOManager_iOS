@@ -1,3 +1,21 @@
+* Thu Apr 10th, 2013 - 2.0.10
+- Minor wording changes in header files. Additional debug support.
+
+* Thu Mar 14th, 2013 - 2.0.9
+- Support added for Development API keys and loading pushio_manager_debug.json.
+	
+* Thu Mar 7th, 2013 - 2.0.8
+- Blocks registration when using debug builds with ad-hoc pushio_manager.json.
+- Warning issued when running a build without push configured.
+- Message displayed when push configuration appears to be complete.
+- Detects app store builds and disables some debugging elements.
+	
+* Tue Feb 19th, 2013 - 2.0.7
+- Suspending app now finishes any pending registrations or engagements
+	in background.
+- Limited retries when initial registration fails.
+- Added access to last engagement ID.
+	
 * Wed Nov 28, 2012 - 2.0.5
 - Improved engagement tracking
 - More robust registration process

@@ -2,7 +2,7 @@
 //  PushIOManager+PushIOTrackers.h
 //  PushIOManager
 //
-//  Copyright (c) 2012 Push IO LLC. All rights reserved.
+//  Copyright (c) 2013 Push IO Inc. All rights reserved.
 //
 
 #import "PushIOManager.h"

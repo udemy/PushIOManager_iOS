@@ -2,7 +2,7 @@
 //  PushIOManager.h
 //  PushIOManager
 //
-//  Copyright (c) 2009-2012 Push IO LLC. All rights reserved.
+//  Copyright (c) 2009-2013 Push IO Inc. All rights reserved.
 //
 
 // This version of the PushIOManager library is 2.0.3
@@ -21,11 +21,20 @@
 
 
 @protocol PushIOManagerDelegate <NSObject>
+@optional
+
+// PushIO manager has a valid token and is ready to send a registration to the PushIO servers.
 - (void)readyForRegistration;
+
+// Status of registration calls.  Registration is called after a token is received, or when categories/trackers change.
 - (void)registrationSucceeded;
 - (void)registrationFailedWithError:(NSError *)error statusCode:(int)statusCode;
-@optional
+
+// In processing a push we found that new Newsstand content is ready.
 - (void)newNewsstandContentAvailable;
+
+// PushIOManager has extracted a push dictionary, the metadata is ready to be retrieved.
+- (void)pushProcessed;
 @end
 
 
@@ -63,6 +72,10 @@ typedef enum  {
 
 // This gives you the entire push dictionary above the APS level, along with other meta values that may have been sent in the push.
 @property (nonatomic, strong) NSDictionary *lastPushMeta;
+
+// Each push received includes a unique engagementID that replates to that specific push.  Here you can find what the last
+// such ID was and make use of it if needed.
+@property (nonatomic, copy, readonly) NSString *lastEngagementID;
 
 
 //
@@ -129,6 +142,9 @@ typedef enum  {
 // Currently in-use Push IO api settings
 - (NSString *) pushIOAPIHost;
 - (NSString *) pushIOAPIKey;
+
+// If you want to use a different API key from the one in the pushio_config.json, set this property.
+@property (nonatomic, retain) NSString *overridePushIOAPIKey;
 
 // A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io
 // This call will always return a non-null value.

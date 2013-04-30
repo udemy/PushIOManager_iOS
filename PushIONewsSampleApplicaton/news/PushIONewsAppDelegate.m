@@ -2,7 +2,7 @@
 //  PushIONewsAppDelegate.m
 //  news
 //
-//  Copyright (c) 2012 Push IO LLC. All rights reserved.
+//  Copyright (c) 2013 Push IO Inc. All rights reserved.
 //
 
 #import "PushIONewsAppDelegate.h"
@@ -10,26 +10,6 @@
 @implementation PushIONewsAppDelegate
 
 #pragma mark Application Lifecycle
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [[PushIOManager sharedInstance] setDelegate:self];
-    [[PushIOManager sharedInstance] didFinishLaunchingWithOptions:launchOptions];
-    [[PushIOManager sharedInstance] setDebugLevel:PUSHIO_DEBUG_VERBOSE];
-    
-    
-    BOOL pushEnabled = [[[NSUserDefaults standardUserDefaults] valueForKey:@"PIONews_All"] boolValue];
-
-    if (pushEnabled == YES)
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeNewsstandContentAvailability];
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NKDontThrottleNewsstandContentNotifications"];   
-    }
-     
-    return YES;
-}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

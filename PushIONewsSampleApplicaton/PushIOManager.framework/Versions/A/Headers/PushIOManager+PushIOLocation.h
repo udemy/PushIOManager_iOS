@@ -2,7 +2,7 @@
 //  PushIOManager+PushIOLocation.h
 //  PushIOManager
 //
-//  Copyright (c) 2012 Push IO LLC. All rights reserved.
+//  Copyright (c) 2013 Push IO Inc. All rights reserved.
 //
 
 #import <CoreLocation/CoreLocation.h>
@@ -10,9 +10,9 @@
 #import "PushiOManager+PushIOTrackers.h"
 
 // If you are a delegate of PushIOManager, you will also be signed up for these callbacks also.
-@protocol PushiOManagerLocationDelegate <NSObject>
+@protocol PushiOManagerLocationDelegate <PushIOManagerDelegate>
 @optional
-// Returns you the current location as changes are detected.
+// Returns you the current location as changes are detected that exceed the area of interest.
 // A null location means location services have been disabled.
 - (void) locationDidChange:(CLLocation *)newLocation;
 @end
