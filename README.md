@@ -19,7 +19,7 @@
 * Sales/Billing: [sales@push.io] (mailto:sales@push.io?subject=Push IO sales inquiry)
 * Telephone: 1-888-PUSHIO-1
 
-Copyright © 2009 - 2012 Push IO LLC. All Rights Reserved.  
+Copyright © 2009 - 2013 Push IO Inc. All Rights Reserved.  
 Push IO® is a registered trademark in the United States. All other trademarks are the property of their respective owners.
 
 
