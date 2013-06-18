@@ -121,7 +121,7 @@ typedef enum  {
 // Unregisters a single category, leaving all other categories in place.
 - (void) unregisterCategory:(NSString *)category;
 
-// Unregisters a group of categories, leaving all other categories in place.
+// Unregisters a group of categories, leaving any categories not in the pased in array still registered.
 - (void) unregisterCategories:(NSArray *)categories;
 
 // Unregister all categories for this device from Push IO
