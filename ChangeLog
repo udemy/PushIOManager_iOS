@@ -2,6 +2,7 @@
 - Added call to unregsiter array of categories.
 - Improved location handling code.
 - Added monitored regions to location handling category.
+- Added ability to track home location with location updates.
 
 * Thu Apr 10th, 2013 - 2.0.10
 - Minor wording changes in header files. Additional debug support.
