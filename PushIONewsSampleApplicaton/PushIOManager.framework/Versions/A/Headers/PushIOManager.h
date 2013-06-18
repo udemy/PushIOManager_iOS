@@ -5,7 +5,7 @@
 //  Copyright (c) 2009-2013 Push IO Inc. All rights reserved.
 //
 
-// This version of the PushIOManager library is 2.0.3
+// This version of the PushIOManager library is 2.0.11
 
 #import <Foundation/Foundation.h>
 
@@ -15,9 +15,14 @@
 // After you add an app, set up your iOS platform via the "Set Up" section. You will then see a link
 // to download a "pushio_config.json" file, which contains your API Key.  
 //
-// You need to place it inside of a file called "pushio_config.json", which you then
-// place inside your project alongside the AppDelegate (so that it is included in your application bundle).
+// Place this file in your project alongside the AppDelegate (so that it is included in your application bundle).
 
+// If you subscribe to these notification you'll be notified when a push is processed by this library, or the system has registered.
+// You can also get the same information by setting a delegate for PushIOManager, described below.
+
+extern NSString * const kPushProcessedNotification; // includes dictionary of lastPushMeta in userInfo
+extern NSString * const kPushRegistrationSuccess;
+extern NSString * const kPushRegistrationFailure; // Includes dictionary with error and statusCode entries.
 
 
 @protocol PushIOManagerDelegate <NSObject>
@@ -116,6 +121,9 @@ typedef enum  {
 // Unregisters a single category, leaving all other categories in place.
 - (void) unregisterCategory:(NSString *)category;
 
+// Unregisters a group of categories, leaving all other categories in place.
+- (void) unregisterCategories:(NSArray *)categories;
+
 // Unregister all categories for this device from Push IO
 - (void) unregisterAllCategories;
 
@@ -149,6 +157,9 @@ typedef enum  {
 // A unique ID used by Push IO. You can use this for adding test devices at https://manage.push.io
 // This call will always return a non-null value.
 - (NSString *) pushIOUUID;
+
+// Returns the version of the framework that you have installed.
+- (NSString *) frameworkVersion;
 
 //
 // Singleton instance

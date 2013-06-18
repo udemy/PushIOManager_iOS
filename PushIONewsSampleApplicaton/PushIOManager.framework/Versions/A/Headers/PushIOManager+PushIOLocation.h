@@ -9,12 +9,31 @@
 #import "PushIOManager.h"
 #import "PushiOManager+PushIOTrackers.h"
 
+typedef enum
+{
+    UNKNOWN = 0,
+    USER_DISABLED_LOCATION,
+    DEVICE_DOES_NOT_SUPPORT_LOCATION,
+    DEVICE_CANNOT_MONITOR_REGIONS,
+    LOCATION_TEMP_ERROR
+}
+PushIOLocationError;
+
 // If you are a delegate of PushIOManager, you will also be signed up for these callbacks also.
-@protocol PushiOManagerLocationDelegate <PushIOManagerDelegate>
+@protocol PushIOManagerLocationDelegate <PushIOManagerDelegate>
 @optional
 // Returns you the current location as changes are detected that exceed the area of interest.
 // A null location means location services have been disabled.
 - (void) locationDidChange:(CLLocation *)newLocation;
+
+// If there's an error enabling location (either because the user denied it or it just didn't work) this will let you know.
+- (void) locationNotMonitored:(PushIOLocationError)locationError detailedCoreLcoationError:(NSError *)error;
+
+// These let you know when the user has entered or left targeted regions so that you can do further actions.
+// Note these could be called while the application is in the background.
+- (void) userEnteredMonitoredRegion:(NSString *)regionID;
+- (void) userLeftMonitoredRegion:(NSString *)regionID;
+
 @end
 
 @class PushIOLocationTracker;
@@ -22,6 +41,8 @@
 // Category on PushIOManager.
 
 @interface PushIOManager (PushIOLocation) <CLLocationManagerDelegate>
+
+
 
 //      *********** SETUP AND MANAGEMENT OF LOCATION SERVICES FOR ENGAGEMENT TRACKING **************
 // Two options are presented for location management, The first where PushIOManager maintains a CLLocationManager.
@@ -31,6 +52,13 @@
 
 // =========== Option (1) - pushIOManager can create and maintian a LocationManager.
 
+// This property provides a human readable reason for the applicatino to be using location services.
+// Note that underneath this is using the CLLocationManager "purpose", which is depricated as of iOS6.
+// For applications targeting iOS6 and later, instead provide an entry in your info.plist with the location privacy key:
+// "Privacy - Location Usage Description" and a string describing the reason for location.
+// Call this before you start monitoring for location updates.
+@property (nonatomic, copy) NSString *locationPurpose;
+
 // These calls tell PushIO to start monitoring location for push notification engagemnet tracking.
 // Note that the pushIOManager library will maintain a CoreLocation LocationManager, and manage shutting down
 // or starting up this location manager when the application suspends/resume.
@@ -38,8 +66,16 @@
 // to generate the alert asking the user for permission to monitor locations.
 - (void) startUpdatingLocationForPush;
 
+// This does the same thing as "startUpdatingLocationForPush", only the location changes
+// will also be assigned to the home location as they shift.
+// This is mainly useful for targeting pushes by a geographic region.
+- (void) startUpdatingLocationForPushTrackingHome;
+
+
 // If you want to provide the user with a reason why the application would like to monitor location, add that string here.
-- (void) startUpdatingLocationForPushWithReason:(NSString *)reasonForLocationMonitoring;
+// REMOVED in this version of the library, use the "locationPurpose" property above, or the info.plist location purpose setting.
+//- (void) startUpdatingLocationForPushWithReason:(NSString *)reasonForLocationMonitoring;
+
 
 // You only need to call this if you wish to disable location services while the application is running.
 - (void) stopUpdatingLocationForPush;
@@ -51,6 +87,21 @@
 // Last location found by the internal location manager, so that you can use the location found for your own needs as well.
 - (CLLocation *) lastLocationFound;
 
+// If this returns YES, PushIOManager location tracking will be maintined in the background.  If no, location
+// monitoring will be disabled when the application is sent to the background.
+- (BOOL) willMonitorLocationInBackground;
+
+// Provides a region into which the application shuld be notified if the user entered.
+// If the passed in region contains a region ID, that will be used and will replace an existing region of the same ID.
+// If the passed in region contains a null or empty regionID, then one will be generated.
+// Returns the regionID for this monitored region.
+- (NSString *)startMonitoringEntryRegion:(CLRegion *)region;
+
+// Pass in the regionID returned by the "startMonitoringEntryRegion" call to end monitoring for that region.
+- (void) stopMonitoringEntryRegion:(NSString *)regionID;
+
+// CLears out any monitoring.
+- (void) clearAllMonitoredRegions;
 
 // =========== Option (2) - you can manage your own CoreLocation manager.
 
