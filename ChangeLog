@@ -1,3 +1,6 @@
+* Fri July 5th, 2013 - 2.0.13
+- Stability fix for case where -ObjC and -all_load linker flags are omitted.
+
 * Fri Jun 28th, 2013 - 2.0.12
 - Improved handling of application resume when background registrations are active.
 
