@@ -1,7 +1,7 @@
 * Mon July 15th, 2013 - 2.9.0
-- Stability fix for background tasks
+- Stability fix for background tasks.
 - Update to Location category to combine home and current location.
-- Chnages to Location handling to provide default limits on location registration
+- Changes to Location handling to provide default limits on location registration.
 	
 * Fri July 5th, 2013 - 2.0.13
 - Stability fix for case where -ObjC and -all_load linker flags are omitted.
