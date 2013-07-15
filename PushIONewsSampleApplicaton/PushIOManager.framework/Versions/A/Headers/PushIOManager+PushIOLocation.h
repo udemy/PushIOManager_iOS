@@ -66,25 +66,25 @@ PushIOLocationError;
 // to generate the alert asking the user for permission to monitor locations.
 - (void) startUpdatingLocationForPush;
 
-// This does the same thing as "startUpdatingLocationForPush", only the location changes
-// will also be assigned to the home location as they shift.
-// This is mainly useful for targeting pushes by a geographic region.
-- (void) startUpdatingLocationForPushTrackingHome;
-
-
-// If you want to provide the user with a reason why the application would like to monitor location, add that string here.
-// REMOVED in this version of the library, use the "locationPurpose" property above, or the info.plist location purpose setting.
-//- (void) startUpdatingLocationForPushWithReason:(NSString *)reasonForLocationMonitoring;
-
 
 // You only need to call this if you wish to disable location services while the application is running.
 - (void) stopUpdatingLocationForPush;
 
 // By default PushIOManager will use the "significant change" location service for detecting location.
 // If you set this property, the "standard location" service will be used with this value set.
+// Note that pushIOManager will not register location updates unless a new location is greater in distance from
+// the old one than this location accuracy setting - or 200 meters if this value is not set.
 @property (nonatomic, assign) CLLocationAccuracy desiredLocationAccuracy;
 
-// Last location found by the internal location manager, so that you can use the location found for your own needs as well.
+// This value will keep the PushIOManaged CLLocationManager from giving you an update unless the new distance is
+// greater than the distance filter.
+// The default value is 200 meters, note that the CLLocation manager defult is "always update" but
+// this larger update value is default to keep from registering location changes too often, thus saving
+// battery life.  Only override if you really need greater accuracy for pushes or other internal needs.
+@property (nonatomic, assign) CLLocationDistance distanceFilter;
+
+// Last location found by the internal location manager,
+// or set by "assignCurrentLocation" so that you can use the location found for your own needs as well.
 - (CLLocation *) lastLocationFound;
 
 // If this returns YES, PushIOManager location tracking will be maintined in the background.  If no, location
@@ -109,17 +109,23 @@ PushIOLocationError;
 // This same location will be passed back to PushIO for engagemnet tracking when set.
 // The location persists for the life of the application, until changed again or the application is shut down.
 // You can make a new CLLocation object from lat/long values using the CLLocation initWithLatitude:longitude: method.
+// If you call this more often than every ten minutes, the revsied location will be held until twn minutes have passed, then a
+// new registration issued - this is to preserve battery life of the users device.
 
-- (void) assignCurrentLocation:(CLLocation *)location;
+- (void) assignLocation:(CLLocation *)location;
 //***********
 
 
-//      *********** HOME LOCATION *****************
+//      *********** DEPRECATED LOCATION METHODS *****************
 
-// PushIOManager has the concept of a "home location" that can be set, this is passed up with registration calls only (not engagements which
-// use the current location or a location you set dynamically)
+// These methods have been removed from the API.  Please use "assignLocation" and the "lastLocationFound" values for all updates.
+// There is no longer a seperation between registration location and home location.  Internal location updates will always set
+// lastLocationFound.
 
-@property (nonatomic, retain) CLLocation *homeLocation;
+//@property (nonatomic, retain) CLLocation *homeLocation;
+//- (void) assignCurrentLocation:(CLLocation *)location;
+//- (void) startUpdatingLocationForPushTrackingHome;
+
 
 
 //      *********** LOCATION PUBLISHER **************

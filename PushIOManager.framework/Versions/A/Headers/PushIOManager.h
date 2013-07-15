@@ -69,6 +69,9 @@ typedef enum  {
 // See the PushIODebugLevel enum for valid debug levels.
 @property (nonatomic, assign) PushIODebugLevel debugLevel;
 
+// By default PushIOManger reports the local time zone to the server to use for push determination.
+// This allows you to set a custom timezone around which pushes can be filtered.
+@property (nonatomic, retain) NSTimeZone *overrideTimeZone;
 
 // We store away the last updates to badge values, alert text and sound files stored in the alert so you
 // do not have to do your own parsing.
