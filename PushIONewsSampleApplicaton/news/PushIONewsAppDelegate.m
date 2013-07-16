@@ -2,7 +2,7 @@
 //  PushIONewsAppDelegate.m
 //  news
 //
-//  Copyright (c) 2013 Push IO LLC. All rights reserved.
+//  Copyright (c) 2013 Push IO Inc. All rights reserved.
 //
 
 #import "PushIONewsAppDelegate.h"
@@ -54,6 +54,7 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:alertMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
 }
+
 
 #pragma mark Push IO
 

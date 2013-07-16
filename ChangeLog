@@ -1,18 +1,38 @@
+* Mon July 15th, 2013 - 2.9.0
+- Stability fix for background tasks.
+- Update to Location category to combine home and current location.
+- Changes to Location handling to provide default limits on location registration.
+	
+* Fri July 5th, 2013 - 2.0.13
+- Stability fix for case where -ObjC and -all_load linker flags are omitted.
+
+* Fri Jun 28th, 2013 - 2.0.12
+- Improved handling of application resume when background registrations are active.
+
+* Tue Jun 18th, 2013 - 2.0.11
+- Added call to unregsiter array of categories.
+- Improved location handling code.
+- Added monitored regions to location handling category.
+- Added ability to track home location with location updates.
+
+* Thu Apr 10th, 2013 - 2.0.10
+- Minor wording changes in header files. Additional debug support.
+
 * Thu Mar 14th, 2013 - 2.0.9
 - Support added for Development API keys and loading pushio_manager_debug.json.
-	
+
 * Thu Mar 7th, 2013 - 2.0.8
 - Blocks registration when using debug builds with ad-hoc pushio_manager.json.
 - Warning issued when running a build without push configured.
 - Message displayed when push configuration appears to be complete.
 - Detects app store builds and disables some debugging elements.
-	
+
 * Tue Feb 19th, 2013 - 2.0.7
 - Suspending app now finishes any pending registrations or engagements
 	in background.
 - Limited retries when initial registration fails.
 - Added access to last engagement ID.
-	
+
 * Wed Nov 28, 2012 - 2.0.5
 - Improved engagement tracking
 - More robust registration process
@@ -21,7 +41,7 @@
 * Mon Oct 11, 2012 - 2.0.4
 - Improved tracker implementation
 
-* Mon Oct 8, 2012 - 2.0.3	
+* Mon Oct 8, 2012 - 2.0.3
 - Fix a bug in the unregisterFromPushIO method
 - Improved engagement transmission
 - Initial support for trackers
