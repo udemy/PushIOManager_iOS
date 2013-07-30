@@ -34,6 +34,9 @@ PushIOLocationError;
 - (void) userEnteredMonitoredRegion:(NSString *)regionID;
 - (void) userLeftMonitoredRegion:(NSString *)regionID;
 
+// Callback when the set of active regions changes in some way.
+- (void) activeRegionsChanged;
+
 @end
 
 @class PushIOLocationTracker;
@@ -84,24 +87,12 @@ PushIOLocationError;
 @property (nonatomic, assign) CLLocationDistance distanceFilter;
 
 // Last location found by the internal location manager,
-// or set by "assignCurrentLocation" so that you can use the location found for your own needs as well.
+// or set by "assignLocation" so that you can use the location found for your own needs as well.
 - (CLLocation *) lastLocationFound;
 
 // If this returns YES, PushIOManager location tracking will be maintined in the background.  If no, location
 // monitoring will be disabled when the application is sent to the background.
 - (BOOL) willMonitorLocationInBackground;
-
-// Provides a region into which the application shuld be notified if the user entered.
-// If the passed in region contains a region ID, that will be used and will replace an existing region of the same ID.
-// If the passed in region contains a null or empty regionID, then one will be generated.
-// Returns the regionID for this monitored region.
-- (NSString *)startMonitoringEntryRegion:(CLRegion *)region;
-
-// Pass in the regionID returned by the "startMonitoringEntryRegion" call to end monitoring for that region.
-- (void) stopMonitoringEntryRegion:(NSString *)regionID;
-
-// CLears out any monitoring.
-- (void) clearAllMonitoredRegions;
 
 // =========== Option (2) - you can manage your own CoreLocation manager.
 
@@ -126,6 +117,29 @@ PushIOLocationError;
 //- (void) assignCurrentLocation:(CLLocation *)location;
 //- (void) startUpdatingLocationForPushTrackingHome;
 
+//      *********** REGION SUPPORT **************
+
+
+// Provides a region into which the application shuld be notified if the user entered.
+// If the passed in region contains a region ID, that will be used and will replace an existing region of the same ID.
+// If the passed in region contains a null or empty regionID, then one will be generated.
+// Returns the regionID for this monitored region.
+- (NSString *)startMonitoringEntryRegion:(CLRegion *)region;
+
+// Pass in the regionID returned by the "startMonitoringEntryRegion" call to end monitoring for that region.
+- (void) stopMonitoringEntryRegion:(NSString *)regionID;
+
+// CLears out any monitoring.
+- (void) clearAllMonitoredRegions;
+
+// Gives you back a set of PIORegion objects that describe all of the regions the system currently knows
+// to monitor.
+@property (nonatomic, retain, readonly) NSArray *monitoredRegions;
+
+// Because there may be more regions than the system itself can monitor, PushIOManager
+// swaps out regions from the larger set and just has the system monitor the closest ones.
+// Thus this array contains the regions the system has been told to monitor.
+@property (nonatomic, readonly) NSArray *activeRegions;
 
 
 //      *********** LOCATION PUBLISHER **************
@@ -154,7 +168,11 @@ PushIOLocationError;
 @property (nonatomic, retain) CLLocation *location;
 
 // Used to build a tracker object.
-// The returned location tracker will have the location and trackerID set.
+// The returned location tracker will have the location and trackerID set automatically based on location.
 + (PushIOLocationTracker *) locationTrackerWithLocation:(CLLocation *)location;
+
+// The returned location tracker will have the location, and trackerID set to your custom ID.
+// Be sure that the customID is unique across trackers!!!
++ (PushIOLocationTracker *) locationTrackerWithLocation:(CLLocation *)location andCustomID:(NSString *)customID;
 
 @end
