@@ -2,7 +2,7 @@
 
 ## PushIOManager for iOS
 
-* [Integration Guide](http://docs.push.io/PushIOManager_iOS/)
+* [Integration Guide](https://pushio.zendesk.com/entries/22286612-Step-By-Step-Push-IO-Setup-Instructions-iOS-)
 
 ## Other Resources
 * [Downloads + Documenation] (http://docs.push.io)
