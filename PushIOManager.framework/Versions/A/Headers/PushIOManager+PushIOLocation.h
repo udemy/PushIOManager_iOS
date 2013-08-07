@@ -132,6 +132,11 @@ PushIOLocationError;
 // CLears out any monitoring.
 - (void) clearAllMonitoredRegions;
 
+// Starts loading regions managed on the PushIO system, loads regions defined by the given LayerID.
+// Contact PushIO for more information on defining managed reigons.
+- (void) startMonitoringRegionsForRemoteLayerID:(NSString *)layerID withPushRegistrationPublisher:(NSString *)pushRegPublisher;
+
+
 // Gives you back a set of PIORegion objects that describe all of the regions the system currently knows
 // to monitor.
 @property (nonatomic, retain, readonly) NSArray *monitoredRegions;
