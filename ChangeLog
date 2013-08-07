@@ -1,3 +1,7 @@
+* Wed Aug 7th, 2013 - 2.9.2
+- Logging cleanup for ACTIVITY level (default).
+- Can monitor more than system maximum number of regions.
+
 * Tue July 30th, 2013 - 2.9.1
 - Metadata improvements.
 - Misc. stability fixes.
