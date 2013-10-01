@@ -59,6 +59,14 @@ typedef enum  {
     PUSHIO_ENGAGEMENT_METRIC_OTHER = 5, // Push IO internal use
 } PushIOEngagementMetrics;
 
+// Because 64-bit suppport added to iOS requires a iOS6.0 deployment target or higher, this version of the framework
+// also requires a deployment target of 6.0 or higher.
+// If you need iOS5 support, a non 64-bit version of the framework is availaible in the PushIOManager-IOS repository,
+// under the directory "iOS5CompatibleFramework".
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
+#error The 64-bit compabtible version of the PushIOManager framework requires a deployment target of 6.0 or higher.
+#error Use the "iOS5CompatibleFramework" PushIOManager.framework from the public repository for a 5.0 compatible version.
+#endif
 
 @interface PushIOManager : NSObject
 
@@ -135,6 +143,12 @@ typedef enum  {
 - (BOOL) isRegisteredForCategory:(NSString *)category;
 - (NSArray *) allRegisteredCategories;
 
+//UserID
+- (void) registerUserID:(NSString *)userID;
+- (void) unregisterUserID;
+- (BOOL) isRegisteredForUserID:(NSString *)userID;
+- (NSString *) registeredUserID;
+
 //
 // Engagement Metric Tracking
 //
@@ -147,6 +161,9 @@ typedef enum  {
 
 // You don't need to call this method directly, we use it for you.
 - (BOOL) trackEngagementOptions:(NSDictionary *)optionsDict withMetric:(PushIOEngagementMetrics)metric;
+
+// Tells you if the application was last launched (or opened from background) as the result of a notification.
+- (BOOL) isCurrentSessionAnEngagement;
 
 //
 // Other Helpers

@@ -34,7 +34,8 @@ PushIOLocationError;
 - (void) userEnteredMonitoredRegion:(NSString *)regionID;
 - (void) userLeftMonitoredRegion:(NSString *)regionID;
 
-// Callback when the set of active regions changes in some way.
+// Callback when the set of active regions changes in some way, usually when you are registered for more regions than
+// the system supports, and the library has decided to switch to a new set of regions for the system to monitor.
 - (void) activeRegionsChanged;
 
 @end
@@ -132,6 +133,15 @@ PushIOLocationError;
 // CLears out any monitoring.
 - (void) clearAllMonitoredRegions;
 
+// This loads a set of regions stored in a GEOJson format
+// http://www.geojson.org/geojson-spec.html#geojson-objects
+// Each region is defined in the "features" section as:
+//{ "type": "Feature",
+//    "geometry": {"type": "Point", "coordinates": [LATTITUDE, LONGITUDE]},
+//    "properties": {"radius": "MY_REGION_RADIUS", "identifier" : "MyUniqueRegionID" }
+//}
+- (void) loadRegionDataFromURL:(NSURL *)regionDataURL forLayerID:(NSString *)layerID;
+
 // Starts loading regions managed on the PushIO system, loads regions defined by the given LayerID.
 // Contact PushIO for more information on defining managed reigons.
 - (void) startMonitoringRegionsForRemoteLayerID:(NSString *)layerID withPushRegistrationPublisher:(NSString *)pushRegPublisher;
@@ -145,6 +155,7 @@ PushIOLocationError;
 // swaps out regions from the larger set and just has the system monitor the closest ones.
 // Thus this array contains the regions the system has been told to monitor.
 @property (nonatomic, readonly) NSArray *activeRegions;
+
 
 
 //      *********** LOCATION PUBLISHER **************

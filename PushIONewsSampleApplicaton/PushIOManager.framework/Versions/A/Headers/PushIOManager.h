@@ -135,6 +135,12 @@ typedef enum  {
 - (BOOL) isRegisteredForCategory:(NSString *)category;
 - (NSArray *) allRegisteredCategories;
 
+//UserID
+- (void) registerUserID:(NSString *)userID;
+- (void) unregisterUserID;
+- (BOOL) isRegisteredForUserID:(NSString *)userID;
+- (NSString *) registeredUserID;
+
 //
 // Engagement Metric Tracking
 //
@@ -147,6 +153,9 @@ typedef enum  {
 
 // You don't need to call this method directly, we use it for you.
 - (BOOL) trackEngagementOptions:(NSDictionary *)optionsDict withMetric:(PushIOEngagementMetrics)metric;
+
+// Tells you if the application was last launched (or opened from background) as the result of a notification.
+- (BOOL) isCurrentSessionAnEngagement;
 
 //
 // Other Helpers
