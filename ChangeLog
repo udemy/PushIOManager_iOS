@@ -1,3 +1,10 @@
+* Mon Sep 30th, 2013 - 2.10.0
+- Default version of framework is now 64 bit compatible, see
+	iOS5CompatibleFramework directory for iOS5 support.
+- Added UserID setting to PushIO manager for reference in targeting pushes.
+- Added isCurrentSessionAnEngagement call to PushIOManager.
+- Added installation time metadata to push registration.
+
 * Wed Aug 7th, 2013 - 2.9.2
 - Logging cleanup for ACTIVITY level (default).
 - Can monitor more than system maximum number of regions.
@@ -10,7 +17,7 @@
 - Stability fix for background tasks.
 - Update to Location category to combine home and current location.
 - Changes to Location handling to provide default limits on location registration.
-	
+
 * Fri July 5th, 2013 - 2.0.13
 - Stability fix for case where -ObjC and -all_load linker flags are omitted.
 
