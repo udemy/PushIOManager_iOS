@@ -1,3 +1,6 @@
+* Thu Oct 3rd, 2013 - 2.10.1
+- Calls from backgrounded app to adjust categories activate background registration.
+
 * Mon Sep 30th, 2013 - 2.10.0
 - Default version of framework is now 64 bit compatible, see
 	iOS5CompatibleFramework directory for iOS5 support.
