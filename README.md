@@ -11,9 +11,6 @@
 * [System Status] (http://status.push.io)
 * [Home Page] (http://www.push.io)
 
-## IRC Channel
-* #pushio on irc.freenode.net
-
 ## Contact
 * Support: [support@push.io] (mailto:support@push.io?subject=Push IO support inquiry)
 * Sales/Billing: [sales@push.io] (mailto:sales@push.io?subject=Push IO sales inquiry)
