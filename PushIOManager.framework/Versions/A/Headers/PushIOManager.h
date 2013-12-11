@@ -5,7 +5,7 @@
 //  Copyright (c) 2009-2013 Push IO Inc. All rights reserved.
 //
 
-// This version of the PushIOManager library is 2.0.11
+// This version of the PushIOManager library is 2.10.2
 
 #import <Foundation/Foundation.h>
 
@@ -63,9 +63,12 @@ typedef enum  {
 // also requires a deployment target of 6.0 or higher.
 // If you need iOS5 support, a non 64-bit version of the framework is availaible in the PushIOManager-IOS repository,
 // under the directory "iOS5CompatibleFramework".
+#if !defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) || defined(IOS_50_COMPAT)
+#else
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000
 #error The 64-bit compabtible version of the PushIOManager framework requires a deployment target of 6.0 or higher.
 #error Use the "iOS5CompatibleFramework" PushIOManager.framework from the public repository for a 5.0 compatible version.
+#endif
 #endif
 
 @interface PushIOManager : NSObject

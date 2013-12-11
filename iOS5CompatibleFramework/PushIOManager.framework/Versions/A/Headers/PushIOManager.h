@@ -5,7 +5,7 @@
 //  Copyright (c) 2009-2013 Push IO Inc. All rights reserved.
 //
 
-// This version of the PushIOManager library is 2.0.11
+// This version of the PushIOManager library is 2.10.2
 
 #import <Foundation/Foundation.h>
 
@@ -58,7 +58,6 @@ typedef enum  {
     PUSHIO_ENGAGEMENT_METRIC_SOCIAL = 4,
     PUSHIO_ENGAGEMENT_METRIC_OTHER = 5, // Push IO internal use
 } PushIOEngagementMetrics;
-
 
 @interface PushIOManager : NSObject
 

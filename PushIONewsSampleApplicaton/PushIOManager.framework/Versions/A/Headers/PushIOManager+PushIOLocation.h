@@ -8,6 +8,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "PushIOManager.h"
 #import "PushiOManager+PushIOTrackers.h"
+#import "PIOBeaconRegion.h"
 
 typedef enum
 {
@@ -33,6 +34,10 @@ PushIOLocationError;
 // Note these could be called while the application is in the background.
 - (void) userEnteredMonitoredRegion:(NSString *)regionID;
 - (void) userLeftMonitoredRegion:(NSString *)regionID;
+
+// Gives you a set of the system beacons that have been found, and the corresponding beacon region object
+// that was registered to find them
+- (void) beaconsRanged:(NSArray *)beacons forBeaconRegion:(PIOBeaconRegion *)beaconRegion;
 
 // Callback when the set of active regions changes in some way, usually when you are registered for more regions than
 // the system supports, and the library has decided to switch to a new set of regions for the system to monitor.
@@ -129,6 +134,10 @@ PushIOLocationError;
 
 // Pass in the regionID returned by the "startMonitoringEntryRegion" call to end monitoring for that region.
 - (void) stopMonitoringEntryRegion:(NSString *)regionID;
+
+// pass in a valid beacon region, must have a valid identifyer and at minimum, a beacon UUID
+// This uses the system detection of beacons.
+- (PIOBeaconRegion *) startMonitoringForBeaconRegion:(PIOBeaconRegion *)beacon;
 
 // CLears out any monitoring.
 - (void) clearAllMonitoredRegions;
