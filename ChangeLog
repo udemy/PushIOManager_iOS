@@ -1,3 +1,8 @@
+* Tue Dec 10th, 2013 - 2.10.2
+- Added 64-bit simualtor binary to 64-bit version of framework.
+- Fixed use of pasteboard output for debugging to be iOS7 compatible.
+- Added initial helper calls for iBeacon regions.
+
 * Thu Oct 3rd, 2013 - 2.10.1
 - Calls from backgrounded app to adjust categories activate background registration.
 
