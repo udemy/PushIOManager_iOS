@@ -1,3 +1,6 @@
+* Thu Jan 13th, 2013 - 2.10.3
+- Fixed bug where unregistering and immediatley re-registering would not register again.
+
 * Tue Dec 10th, 2013 - 2.10.2
 - Added 64-bit simualtor binary to 64-bit version of framework.
 - Fixed use of pasteboard output for debugging to be iOS7 compatible.

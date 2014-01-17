@@ -5,7 +5,7 @@
 //  Copyright (c) 2009-2013 Push IO Inc. All rights reserved.
 //
 
-// This version of the PushIOManager library is 2.10.2
+// This version of the PushIOManager library is 2.10.3
 
 #import <Foundation/Foundation.h>
 
@@ -67,6 +67,7 @@ typedef enum  {
 
 // See the PushIODebugLevel enum for valid debug levels.
 @property (nonatomic, assign) PushIODebugLevel debugLevel;
+
 
 // By default PushIOManger reports the local time zone to the server to use for push determination.
 // This allows you to set a custom timezone around which pushes can be filtered.
