@@ -1,4 +1,7 @@
-* Thu Jan 13th, 2013 - 2.10.3
+* Mon Mar 10th, 2014 - 2.10.4
+- Removed references to advertisingIdentifier selector.
+
+* Thu Jan 13th, 2014 - 2.10.3
 - Fixed bug where unregistering and immediatley re-registering would not register again.
 
 * Tue Dec 10th, 2013 - 2.10.2
