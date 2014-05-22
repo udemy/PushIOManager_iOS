@@ -1,6 +1,6 @@
 ## PushIOManager for iOS
 
-* [Integration Guide](http://docs.pushio)
+* [Integration Guide](http://docs.push.io)
 
 ## Other Resources
 * [Downloads + Documenation] (http://docs.push.io)
