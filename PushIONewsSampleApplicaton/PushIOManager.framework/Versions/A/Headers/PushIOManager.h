@@ -5,7 +5,7 @@
 //  Copyright (c) 2009-2013 Push IO Inc. All rights reserved.
 //
 
-// This version of the PushIOManager library is 2.10.4
+// This version of the PushIOManager library is 2.10.5
 
 #import <Foundation/Foundation.h>
 
