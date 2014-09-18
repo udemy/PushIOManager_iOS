@@ -63,6 +63,13 @@ PushIOLocationError;
 // Call this before you start monitoring for location updates.
 @property (nonatomic, copy) NSString *locationPurpose;
 
+// For iOS8+, the internal locatin manager needs to request either Always or InUse location permissions.
+// Your applciation must provide one of two
+// keys in your info.plist giving the reason why you are requesting location access:
+// NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription
+// If neither key is present or the wrong key is present location monitoring will not work.  Whichever key is present determines
+// which permission the internal location manager asks for.
+
 // These calls tell PushIO to start monitoring location for push notification engagemnet tracking.
 // Note that the pushIOManager library will maintain a CoreLocation LocationManager, and manage shutting down
 // or starting up this location manager when the application suspends/resume.
@@ -119,7 +126,6 @@ PushIOLocationError;
 
 // Pass in the regionID returned by the "startMonitoringEntryRegion" call to end monitoring for that region.
 - (void) stopMonitoringEntryRegion:(NSString *)regionID;
-
 
 // CLears out any monitoring.
 - (void) clearAllMonitoredRegions;
