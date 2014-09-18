@@ -1,8 +1,8 @@
 * Thu Sep 18th, 2014 - 2.10.6
 - Added internal location manager code to handle new iOS8 location permissions.
-- Added passthrough call for iOS8 custom push actions
-- Added convieneince registration methods to simplfy push registration across both iOS7 and iOS8
-- Upgraded framework to support use as Swift module named "PushIOManager"
+- Added passthrough call for iOS8 custom push actions.
+- Added convenience registration methods to simplfy push registration across both iOS7 and iOS8.
+- Upgraded framework to support use as Swift module named "PushIOManager".
 	
 * Mon Jul 28th, 2014 - 2.10.5
 - Improved location services support
