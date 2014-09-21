@@ -1,3 +1,6 @@
+* Sun Sep 21st, 2014 - 2.10.7
+  Fixed linker error when using XCode 5 with PushIOManager library.
+	
 * Thu Sep 18th, 2014 - 2.10.6
 - Added internal location manager code to handle new iOS8 location permissions.
 - Added passthrough call for iOS8 custom push actions.
