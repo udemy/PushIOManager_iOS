@@ -5,7 +5,7 @@
 //  Copyright (c) 2009-2013 Push IO Inc. All rights reserved.
 //
 
-// This version of the PushIOManager library is 2.10.7
+// This version of the PushIOManager library is 2.10.8
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -116,8 +116,16 @@ typedef enum  {
 - (void) didReceiveRemoteNotification:(NSDictionary *)userInfo;
 - (void) didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void) didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+// When engagemnet is finished, call the fetch completion handler with the indicated fetch result
+// Engagement call will occur within five seconds of this call be activated.
+- (void) didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionResult:(UIBackgroundFetchResult)fetchResult fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler;
+#endif
+
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 // Note that PushIOManager will call the completion handler, so make sure you do any additional procesisng before this call.
+// Engagement call will occur within five seconds of this call be activated.
 - (void) handleActionWithIdentifier:(NSString *)identifier
               forRemoteNotification:(NSDictionary *)userInfo
                   completionHandler:(void (^)(void))completionHandler;

@@ -1,12 +1,20 @@
+* Sun Sep 21st, 2014 - 2.10.8
+  Removed iOS5 compatible 32-bit framework (no longer supported).
+  Re-added Armv7s architecture for Xcode5 archive support.
+  Fixed umbrella header warnings.
+  Improvements to handleActionWithIdentifier and
+	didReceiveRemoteNotification, handles compleiton handler after
+	engagements fully sent.
+
 * Sun Sep 21st, 2014 - 2.10.7
-  Fixed linker error when using XCode 5 with PushIOManager library.
-	
+  Fixed linker error when using Xcode5 with PushIOManager library.
+
 * Thu Sep 18th, 2014 - 2.10.6
 - Added internal location manager code to handle new iOS8 location permissions.
 - Added passthrough call for iOS8 custom push actions.
 - Added convenience registration methods to simplfy push registration across both iOS7 and iOS8.
 - Upgraded framework to support use as Swift module named "PushIOManager".
-	
+
 * Mon Jul 28th, 2014 - 2.10.5
 - Improved location services support
 

@@ -12,5 +12,7 @@
 #import "PushIOManager.h"
 #import "PIORegion.h"
 #import "PushIOManager+PushIOLocation.h"
+#import "PushIOTracker+PushIOCustomTracker.h"
+#import "PushIOCustomTrackerPublisher.h"
 
 #endif
