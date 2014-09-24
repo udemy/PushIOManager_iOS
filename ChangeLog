@@ -1,4 +1,4 @@
-* Sun Sep 21st, 2014 - 2.10.8
+* Wed Sep 24th, 2014 - 2.10.8
   Removed iOS5 compatible 32-bit framework (no longer supported).
   Re-added Armv7s architecture for Xcode5 archive support.
   Fixed umbrella header warnings.
