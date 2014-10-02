@@ -1,3 +1,10 @@
+* Wed Oct 1st, 2014 - 2.10.9
+  Fixed duplicte launch engagement when
+	didReceiveRemoteNotification:fetchCompletionHandler: present.
+  Removed UIPasteboard use.
+  Prefixed Location error enum to avoid conflicts.
+  General cleanup.
+
 * Wed Sep 24th, 2014 - 2.10.8
   Removed iOS5 compatible 32-bit framework (no longer supported).
   Re-added Armv7s architecture for Xcode5 archive support.
