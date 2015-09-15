@@ -2,7 +2,7 @@
 //  PushIOManager+PushIOTrackers.h
 //  PushIOManager
 //
-//  Copyright (c) 2009-2015 Oracle. All rights reserved.
+//  Copyright (c) 2013 Push IO Inc. All rights reserved.
 //
 
 #import "PushIOManager.h"
