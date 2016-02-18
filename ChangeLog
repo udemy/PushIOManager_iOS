@@ -1,3 +1,15 @@
+* Fri December 11, 2015 - 2.13.4
+- Precompiled header cache changes.
+
+* Thu November 5, 2015 - 2.13.3
+- Support for armv7, armv7s, i386, x86_64, arm64 architectures.
+
+* Fri October 30, 2015 - 2.13.2
+- Changes to avoid Full Bitcode enable warning.
+
+* Mon October 19, 2015 - 2.13.1
+- Bitcode enabled.
+
 * Thu August 6, 2015 - 2.13.0
 - Added Notification Preferences.
 - Added In-App Messaging.

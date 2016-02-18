@@ -2,8 +2,7 @@
 //  PushIOManagerAll.h
 //  PushIOManager
 //
-//  Created by Kendall Helmstetter Gelner on 9/14/14.
-//  Copyright (c) 2014 Push IO Inc. All rights reserved.
+//  Copyright (c) 2009-2015 Oracle. All rights reserved.
 //
 
 #ifndef PushIOManager_PushIOManagerAll_h
