@@ -6,7 +6,7 @@
 * Ensure that 'Push Notifications' is enabled in your application settings 'Capabilities' tab ![alt text](http://i.stack.imgur.com/33Klz.png "Application Capabilities")
 
 
-* [NSUserNotification](https://developer.apple.com/library/mac/documentation/Foundation/Reference/NSUserNotification_Class/) framework is not supported in current version (6.29.0) of PushIO SDK. For iOS 10 notification support application must override following didReceiveRemoteNotification methods as:
+* [UserNotifications](https://developer.apple.com/reference/usernotifications) framework is not supported in current version (6.29.0) of PushIO SDK. For iOS 10 notification support application must override following didReceiveRemoteNotification methods as:
 
 ```objective-c
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
