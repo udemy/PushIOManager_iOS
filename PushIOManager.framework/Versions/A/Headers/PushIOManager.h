@@ -360,15 +360,37 @@ Convenience method : Combines the new iOS8 calls for registering settings and as
 - (NSString *) pushIOAPIHost;
 
 /**
+ The current Account token in use.
+ */
+- (NSString *) pushIOAccountToken;
+
+/**
  The current API key in use.
  */
 - (NSString *) pushIOAPIKey;
+
+/**
+ Allows the application to specify an Device Tracking ID programatically.
+ */
+@property (nonatomic, strong) NSString *externalDeviceTrackingID;
+
+/**
+ Allows the application to specify an IDFA programatically.
+ */
+@property (nonatomic, strong) NSString *advertisingIdentifier;
+
+/**
+ Override for your Account Token.  You can set the Account Token here instead of the pushio_config.json if you prefer, though the json file adds extra safeguards.
+ @warning This overrides account token read from PushIO configuration files. Preferably set the account token before overriding APIKey.
+ */
+@property (nonatomic, strong) NSString *overrideAccountToken;
 
 /**
  Override for your PushIO API Key.  You can set the API key here instead of the pushio_config.json if you prefer, though the json file adds extra safeguards.
  @warning This overrides any values in the PushIO configuration files.
  */
 @property (nonatomic, strong) NSString *overridePushIOAPIKey;
+
 
 /**
  A unique ID used by Push IO to register a device. You can use this for adding test devices at https://manage.push.io
