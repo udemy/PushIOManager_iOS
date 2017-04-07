@@ -1,3 +1,6 @@
+* Fri April 07, 2017 - 6.29.2
+- Change to Device ID persistence.
+
 * Fri September 16, 2016 - 6.29.1
 - iOS 10 fix for duplicate launch report.
 
