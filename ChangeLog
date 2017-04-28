@@ -1,5 +1,14 @@
+* Fri April 28, 2017 - 6.32.0
+- NOTE:Please read through the Release Notes (https://github.com/pushio/PushIOManager_iOS#release-notes) for upgrading to this version of the SDK.
+- Support for Responsys Interact Message Center.
+- UserNotifications framework support.
+- Support for media (image, audio, video) push.
+- New APIs available for different operations. i.e.: registration etc.
+
+
 * Fri April 07, 2017 - 6.29.2
 - Change to Device ID persistence.
+
 
 * Fri September 16, 2016 - 6.29.1
 - iOS 10 fix for duplicate launch report.

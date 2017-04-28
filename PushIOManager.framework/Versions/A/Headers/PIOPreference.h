@@ -2,17 +2,12 @@
 //  PIOPreference.h
 //  PushIOManager
 //
-//  Copyright (c) 2009-2015 Oracle. All rights reserved.
+//  Copyright © 2009-2017 Oracle. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-static NSString * const PIOPreferenceErrorDomain = @"PIOPreferenceErrorDomain";
-
-typedef enum : NSUInteger {
-    PreferenceErrorValidation = 501,
-    PreferenceErrorUndefinedKey = 502
-} PIOPreferenceErrorType;
+FOUNDATION_EXPORT NSString * const PIOErrorDomainPreference;
 
 
 /**
