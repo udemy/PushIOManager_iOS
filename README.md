@@ -19,7 +19,7 @@
 
 **[3.]** Enable the **Push Notifications** capability:
 
-Your mobile application needs to add the **Push Notifications** capability, which you can do from the **Capabilities** tab of your application settings.  [alt text](https://raw.githubusercontent.com/pushio/PushIOManager_iOS/master/NotificationCapabilities.png "Application Capabilities")
+Your mobile application needs to add the **Push Notifications** capability, which you can do from the **Capabilities** tab of your application settings.  ![alt text](https://raw.githubusercontent.com/pushio/PushIOManager_iOS/master/NotificationCapabilities.png "Application Capabilities")
    
 Ensure that when you enable Push Notifications:
 
