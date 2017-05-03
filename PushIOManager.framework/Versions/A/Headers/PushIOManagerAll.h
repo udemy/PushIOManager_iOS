@@ -2,16 +2,15 @@
 //  PushIOManagerAll.h
 //  PushIOManager
 //
-//  Copyright (c) 2009-2015 Oracle. All rights reserved.
+//  Copyright © 2009-2017 Oracle. All rights reserved.
 //
 
-#ifndef PushIOManager_PushIOManagerAll_h
-#define PushIOManager_PushIOManagerAll_h
+#ifndef PushIOManagerAll_h
+#define PushIOManagerAll_h
 
 #import "PushIOManager.h"
-#import "PIORegion.h"
+#import "PIOMCMessage.h"
 #import "PushIOManager+PushIOLocation.h"
-#import "PushIOTracker+PushIOCustomTracker.h"
-#import "PushIOCustomTrackerPublisher.h"
+#import "PIONotificationCategory.h"
 
-#endif
+#endif /* PushIOManagerAll_h */
